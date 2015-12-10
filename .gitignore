@@ -1,0 +1,13 @@
+Library
+Temp
+Build
+Engine
+Sources
+obj
+Done
+Assets/UnityVS*
+Assembly-*
+*.sln
+*.suo
+*.userprefs
+*.csproj

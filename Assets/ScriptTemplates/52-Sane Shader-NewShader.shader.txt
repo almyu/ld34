@@ -1,0 +1,34 @@
+Shader "Custom/#NAME#" {
+Properties {
+    _MainTex("Base (RGB)", 2D) = "white" {}
+}
+SubShader {
+Tags {
+    "RenderType"="Opaque"
+}
+Pass {
+    CGPROGRAM
+    #pragma vertex vert
+    #pragma fragment frag
+    #include "UnityCG.cginc"
+
+    sampler2D _MainTex;
+    float4 _MainTex_ST;
+
+    struct fragdata {
+        float4 pos : SV_POSITION;
+        float2 uv  : TEXCOORD0;
+    };
+
+    void vert(appdata_base i, out fragdata o) {
+        o.pos = mul(UNITY_MATRIX_MVP, i.vertex);
+        o.uv = TRANSFORM_TEX(i.texcoord, _MainTex);
+    }
+
+    fixed4 frag(fragdata i) : SV_Target {
+        return tex2D(_MainTex, i.uv);
+    }
+    ENDCG
+}
+}
+}

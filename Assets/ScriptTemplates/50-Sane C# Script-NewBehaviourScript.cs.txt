@@ -1,0 +1,10 @@
+﻿using UnityEngine;
+using UnityEngine.Networking;
+
+namespace LD34 {
+
+    public class #SCRIPTNAME# : MonoBehaviour {
+
+
+    }
+}
