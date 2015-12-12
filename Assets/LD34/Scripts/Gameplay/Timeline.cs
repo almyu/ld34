@@ -2,10 +2,26 @@
 
 namespace LD34 {
 
-    public class Timeline : MonoBehaviour {
+    public class Timeline : ScriptableObject {
 
-        public float[] impulses;
+        public const float minLength = 0.1f;
 
+        [System.Serializable]
+        public struct Impulse {
+            public float position, length;
 
+            public float clampedLength {
+                get { return Mathf.Max(minLength, length); }
+            }
+        }
+
+        public Impulse[] impulses;
+
+#if UNITY_EDITOR
+        [UnityEditor.MenuItem("Assets/Create/Timeline", priority = 220)]
+        public static void Create() {
+            AssetUtility.CreateAssetInSelectedDirectory(CreateInstance<Timeline>(), "Timeline");
+        }
+#endif
     }
 }

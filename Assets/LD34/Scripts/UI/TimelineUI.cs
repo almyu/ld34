@@ -7,17 +7,18 @@ namespace LD34.UI {
     public class TimelineUI : MonoBehaviour {
 
         public RectTransform impulseTemplate;
-        public float pixelsPerSecond = 100f;
         public Timeline timeline;
+        public float pixelsPerSecond = 100f;
 
         private void Awake() {
-            foreach (var impulse in timeline.impulses)
-                SpawnImpulse(impulse);
+            foreach (var imp in timeline.impulses)
+                SpawnImpulse(imp);
         }
 
-        private RectTransform SpawnImpulse(float time) {
+        private RectTransform SpawnImpulse(Timeline.Impulse imp) {
             var xf = Instantiate(impulseTemplate);
-            xf.anchoredPosition = xf.anchoredPosition.WithX(time * pixelsPerSecond);
+            xf.anchoredPosition = xf.anchoredPosition.WithX(imp.position * pixelsPerSecond);
+            xf.sizeDelta = xf.sizeDelta.WithX(imp.clampedLength * pixelsPerSecond);
             xf.SetParent(transform, false);
             xf.gameObject.SetActive(true);
             return xf;
