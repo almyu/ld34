@@ -28,7 +28,7 @@ namespace LD34.UI {
             xf.gameObject.SetActive(true);
 
             // HACK
-            matcher.AddPulse(time, length, pulse);
+            //matcher.AddPulse(time, length, pulse);
         }
     }
 }

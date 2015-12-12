@@ -10,6 +10,7 @@ namespace LD34 {
         public Transform destination;
 
         public TimelinePlayer spawnPlayer, destPlayer;
+        public InputMatcher destMatcher;
 
         private float travelTime;
 
@@ -31,11 +32,13 @@ namespace LD34 {
             enemy.transform.position = point;
             enemy.destiantion = destination.position;
 
+            destMatcher.AddPulse(Time.timeSinceLevelLoad + travelTime, length, enemy);
+
             //Debug.Log("Mob at " + point + " arrives in " + travelTime + " dist " + dist);
         }
 
         public Enemy RollEnemyPrefab(float length) {
-            return length >= bossMinLength
+            return length < bossMinLength
                 ? regularPrefabs[Random.Range(0, regularPrefabs.Length)]
                 : bossPrefabs[Random.Range(0, bossPrefabs.Length)];
         }
