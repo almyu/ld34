@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using JamSuite.Events;
 
 namespace LD34 {
 
@@ -10,6 +11,7 @@ namespace LD34 {
         public int pulseIndex;
         public bool pulseStarted;
 
+        public FloatEvent onPulse;
         public UnityEvent onPulseStart, onPulseEnd, onTimelineEnd;
 
         public Timeline.Pulse pulse {
@@ -22,6 +24,7 @@ namespace LD34 {
             if (pulse.position <= time && !pulseStarted) {
                 pulseStarted = true;
                 onPulseStart.Invoke();
+                onPulse.Invoke(pulse.length);
             }
 
             if (pulse.position + pulse.clampedLength <= time) {
