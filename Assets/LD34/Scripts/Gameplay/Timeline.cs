@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LD34 {
 
@@ -7,7 +8,7 @@ namespace LD34 {
         public const float minLength = 0.1f;
 
         [System.Serializable]
-        public struct Impulse {
+        public struct Pulse {
             public float position, length;
 
             public float clampedLength {
@@ -15,7 +16,8 @@ namespace LD34 {
             }
         }
 
-        public Impulse[] impulses;
+        [FormerlySerializedAs("impulses")]
+        public Pulse[] pulses;
 
 #if UNITY_EDITOR
         [UnityEditor.MenuItem("Assets/Create/Timeline", priority = 220)]

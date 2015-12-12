@@ -6,22 +6,36 @@ namespace LD34.UI {
     [RequireComponent(typeof(RectTransform))]
     public class TimelineUI : MonoBehaviour {
 
-        public RectTransform impulseTemplate;
+        public RectTransform pulseTemplate;
         public Timeline timeline;
         public float pixelsPerSecond = 100f;
 
-        private void Awake() {
-            foreach (var imp in timeline.impulses)
-                SpawnImpulse(imp);
+        private RectTransform currentPulse;
+
+        private void Update() {
+            AnimatePulses();
+            if (currentPulse) GrowPulse();
         }
 
-        private RectTransform SpawnImpulse(Timeline.Impulse imp) {
-            var xf = Instantiate(impulseTemplate);
-            xf.anchoredPosition = xf.anchoredPosition.WithX(imp.position * pixelsPerSecond);
-            xf.sizeDelta = xf.sizeDelta.WithX(imp.clampedLength * pixelsPerSecond);
-            xf.SetParent(transform, false);
-            xf.gameObject.SetActive(true);
-            return xf;
+        public void StartPulse() {
+            currentPulse = Instantiate(pulseTemplate);
+            currentPulse.anchoredPosition = Vector2.zero;
+            currentPulse.SetParent(transform, false);
+            currentPulse.gameObject.SetActive(true);
+        }
+
+        public void AnimatePulses() {
+            foreach (RectTransform child in transform)
+                if (child.gameObject.activeSelf)
+                    child.anchoredPosition += Vector2.left * pixelsPerSecond * Time.deltaTime;
+        }
+
+        public void GrowPulse() {
+            currentPulse.sizeDelta += Vector2.right * pixelsPerSecond * Time.deltaTime;
+        }
+
+        public void EndPulse() {
+            currentPulse = null;
         }
     }
 }
