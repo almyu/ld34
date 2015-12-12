@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace LD34 {
 
-    public interface IPulseVisual {
-        void Activate();
-        void Finish();
-        void Fail();
+    public interface IPulseListener {
+        void ActivatePulse();
+        void FinishPulse();
+        void FailPulse();
     }
 
     public class InputMatcher : MonoBehaviour {
@@ -20,7 +20,7 @@ namespace LD34 {
         private class PulseState {
             public bool activated;
             public float actionTime, length;
-            public IPulseVisual callback;
+            public IPulseListener listener;
         }
 
         private Queue<PulseState> queue = new Queue<PulseState>();
@@ -29,12 +29,12 @@ namespace LD34 {
             AddPulse(Time.timeSinceLevelLoad, length, null);
         }
 
-        public void AddPulse(float time, float length, IPulseVisual callback) {
+        public void AddPulse(float time, float length, IPulseListener callback) {
             queue.Enqueue(new PulseState {
                 activated = false,
                 actionTime = time,
                 length = length,
-                callback = callback
+                listener = callback
             });
         }
 
@@ -54,6 +54,10 @@ namespace LD34 {
 
             pulse.activated = true;
             pulse.actionTime += pulse.length;
+
+            if (pulse.listener != null)
+                pulse.listener.ActivatePulse();
+
             onStartHit.Invoke();
         }
 
@@ -67,10 +71,16 @@ namespace LD34 {
 
             // Too early, discard
             if (Time.timeSinceLevelLoad < pulse.actionTime) {
+                if (pulse.listener != null)
+                    pulse.listener.FailPulse();
+
                 onFail.Invoke();
                 queue.Dequeue();
                 return;
             }
+
+            if (pulse.listener != null)
+                pulse.listener.FinishPulse();
 
             onEndHit.Invoke();
             queue.Dequeue();
@@ -85,6 +95,9 @@ namespace LD34 {
 
                 // Too late, no matter what stage
                 if (Time.timeSinceLevelLoad - pulse.actionTime > maxError) {
+                    if (pulse.listener != null)
+                        pulse.listener.FailPulse();
+
                     onFail.Invoke();
                     queue.Dequeue();
                 }

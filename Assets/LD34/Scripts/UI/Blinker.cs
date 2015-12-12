@@ -8,6 +8,7 @@ namespace LD34.UI {
 
         public Gradient gradient;
         public float duration = 0.2f;
+        public bool normallyTransparent;
 
         private CanvasRenderer cachedRenderer;
 
@@ -16,7 +17,7 @@ namespace LD34.UI {
         }
 
         private void Start() {
-            cachedRenderer.SetColor(gradient.Evaluate(1f));
+            if (normallyTransparent) cachedRenderer.SetColor(Color.clear);
         }
 
         public void Blink() {
@@ -28,7 +29,7 @@ namespace LD34.UI {
                 cachedRenderer.SetColor(gradient.Evaluate(t / duration));
                 yield return null;
             }
-            cachedRenderer.SetColor(gradient.Evaluate(1f));
+            if (normallyTransparent) cachedRenderer.SetColor(Color.clear);
         }
     }
 }
