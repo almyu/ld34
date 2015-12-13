@@ -4,43 +4,62 @@ using System.Collections.Generic;
 
 namespace LD34 {
 
+    public interface IInputMatchListener {
+        void MissPulse();
+        void ActivatePulse(Pulse pulse);
+        void FinishPulse(Pulse pulse);
+        void FailPulse(Pulse pulse);
+    }
+
     public interface IPulseListener {
         void ActivatePulse();
         void FinishPulse();
         void FailPulse();
+        void UpdatePulseProximity(float dt);
+    }
+
+    public class Pulse {
+        public bool activated;
+        public float actionTime, length;
+        public List<IPulseListener> listeners;
     }
 
     public class InputMatcher : MonoBehaviour {
 
         public string inputButton = "Fire1";
 
+        public float latency = 6f;
         public float maxError = 0.1f;
-        public UnityEvent onStartHit, onEndHit, onMiss, onFail;
 
-        private class PulseState {
-            public bool activated;
-            public float actionTime, length;
-            public IPulseListener listener;
-        }
+        [System.Serializable]
+        public class PulseAddedEvent : UnityEvent<Pulse> {}
 
-        private Queue<PulseState> queue = new Queue<PulseState>();
+        public PulseAddedEvent onPulseAdded;
+
+        public List<IInputMatchListener> listeners = new List<IInputMatchListener>();
+
+
+        private Queue<Pulse> queue = new Queue<Pulse>();
 
         public void AddPulse(float length) {
-            AddPulse(Time.timeSinceLevelLoad, length, null);
+            AddPulse(Time.timeSinceLevelLoad + latency, length);
         }
 
-        public void AddPulse(float time, float length, IPulseListener callback) {
-            queue.Enqueue(new PulseState {
+        public void AddPulse(float time, float length) {
+            var pulse = new Pulse {
                 activated = false,
                 actionTime = time,
                 length = length,
-                listener = callback
-            });
+                listeners = new List<IPulseListener>()
+            };
+            queue.Enqueue(pulse);
+            onPulseAdded.Invoke(pulse);
         }
 
         public void StartInput() {
             if (queue.Count == 0) {
-                onMiss.Invoke();
+                foreach (var listener in listeners)
+                    listener.MissPulse();
                 return;
             }
 
@@ -48,17 +67,19 @@ namespace LD34 {
 
             // Too early, don't discard
             if (Time.timeSinceLevelLoad < pulse.actionTime) {
-                onMiss.Invoke();
+                foreach (var listener in listeners)
+                    listener.MissPulse();
                 return;
             }
 
             pulse.activated = true;
             pulse.actionTime += pulse.length;
 
-            if (pulse.listener != null)
-                pulse.listener.ActivatePulse();
+            foreach (var listener in listeners)
+                listener.ActivatePulse(pulse);
 
-            onStartHit.Invoke();
+            foreach (var listener in pulse.listeners)
+                listener.ActivatePulse();
         }
 
         public void EndInput() {
@@ -71,18 +92,22 @@ namespace LD34 {
 
             // Too early, discard
             if (Time.timeSinceLevelLoad < pulse.actionTime) {
-                if (pulse.listener != null)
-                    pulse.listener.FailPulse();
+                foreach (var listener in pulse.listeners)
+                    listener.FailPulse();
 
-                onFail.Invoke();
+                foreach (var listener in listeners)
+                    listener.FailPulse(pulse);
+
                 queue.Dequeue();
                 return;
             }
 
-            if (pulse.listener != null)
-                pulse.listener.FinishPulse();
+            foreach (var listener in pulse.listeners)
+                listener.FinishPulse();
 
-            onEndHit.Invoke();
+            foreach (var listener in listeners)
+                listener.FinishPulse(pulse);
+
             queue.Dequeue();
         }
 
@@ -93,12 +118,19 @@ namespace LD34 {
             if (queue.Count != 0) {
                 var pulse = queue.Peek();
 
+                var prox = Time.timeSinceLevelLoad - pulse.actionTime;
+
+                foreach (var listener in pulse.listeners)
+                    listener.UpdatePulseProximity(prox);
+
                 // Too late, no matter what stage
                 if (Time.timeSinceLevelLoad - pulse.actionTime > maxError) {
-                    if (pulse.listener != null)
-                        pulse.listener.FailPulse();
+                    foreach (var listener in pulse.listeners)
+                        listener.FailPulse();
 
-                    onFail.Invoke();
+                    foreach (var listener in listeners)
+                        listener.FailPulse(pulse);
+
                     queue.Dequeue();
                 }
             }

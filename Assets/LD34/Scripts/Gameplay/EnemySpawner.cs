@@ -7,31 +7,18 @@ namespace LD34 {
         public Enemy[] regularPrefabs, bossPrefabs;
         public float bossMinLength = 1f;
         public float spawnExtent = 5f;
-        public Transform destination;
 
-        public TimelinePlayer spawnPlayer, destPlayer;
-        public InputMatcher destMatcher;
-
-        public float travelTime;
-
-        private void Awake() {
-            travelTime = spawnPlayer.time - destPlayer.time; // + destMatcher.maxError * 0.5f;
-            spawnPlayer.onPulse.AddListener(SpawnEnemy);
-        }
-
-        protected void SpawnEnemy(float length) {
-            var prefab = RollEnemyPrefab(length);
+        public void SpawnEnemy(Pulse pulse) {
+            var prefab = RollEnemyPrefab(pulse.length);
             var enemy = Instantiate(prefab);
 
-            var dist = travelTime * enemy.speed;
+            var dist = (pulse.actionTime - Time.realtimeSinceStartup) * enemy.speed; // shift by half error?
             var point = new Vector2(dist, RollSpawnHeight());
 
             enemy.transform.position = point;
             enemy.destiantion = new Vector2(-point.x, point.y);
 
-            destMatcher.AddPulse(Time.timeSinceLevelLoad + travelTime, length, enemy);
-
-            //Debug.Log("Mob at " + point + " arrives in " + travelTime + " dist " + dist);
+            pulse.listeners.Add(enemy);
         }
 
         public Enemy RollEnemyPrefab(float length) {

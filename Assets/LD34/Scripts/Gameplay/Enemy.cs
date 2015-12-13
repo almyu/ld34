@@ -29,6 +29,8 @@ namespace LD34 {
             mode = Mode.Attack;
         }
 
+        public void UpdatePulseProximity(float dt) {}
+
         private void Update() {
             if (mode == Mode.Approach) {
                 var pos = transform.position;
