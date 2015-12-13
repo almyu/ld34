@@ -14,11 +14,11 @@ namespace LD34 {
         private bool charge;
         private Vector2 velocity;
 
-        public void ActivatePulse() {
+        public void ActivatePulse(float timing) {
             speed *= 0.5f;
         }
 
-        public void FinishPulse() {
+        public void FinishPulse(float timing) {
             onHit.Invoke();
             StartCoroutine(DoScheduleDeath());
         }

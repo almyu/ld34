@@ -6,8 +6,8 @@ namespace LD34 {
 
     public interface IPulseListener {
         void MissPulse();
-        void ActivatePulse();
-        void FinishPulse();
+        void ActivatePulse(float timing);
+        void FinishPulse(float timing);
         void FailPulse();
         void UpdatePulseProximity(float dt);
     }
@@ -78,14 +78,16 @@ namespace LD34 {
                 return;
             }
 
+            var timing = CalcTiming(pulse.actionTime);
+
             pulse.activated = true;
             pulse.actionTime += pulse.length;
 
             foreach (var listener in listeners)
-                listener.ActivatePulse();
+                listener.ActivatePulse(timing);
 
             foreach (var listener in pulse.listeners)
-                listener.ActivatePulse();
+                listener.ActivatePulse(timing);
         }
 
         public void EndInput() {
@@ -108,13 +110,21 @@ namespace LD34 {
                 return;
             }
 
+            var timing = CalcTiming(pulse.actionTime);
+
             foreach (var listener in pulse.listeners)
-                listener.FinishPulse();
+                listener.FinishPulse(timing);
 
             foreach (var listener in listeners)
-                listener.FinishPulse();
+                listener.FinishPulse(timing);
 
             queue.Dequeue();
+        }
+
+        private float CalcTiming(float actionTime, bool abs = true) {
+            var dt = Time.timeSinceLevelLoad - actionTime;
+            var timing = dt - maxError * 0.5f;
+            return abs ? Mathf.Abs(timing) : timing;
         }
 
         private void Update() {
@@ -127,6 +137,9 @@ namespace LD34 {
                 var prox = Time.timeSinceLevelLoad - pulse.actionTime;
 
                 foreach (var listener in pulse.listeners)
+                    listener.UpdatePulseProximity(prox);
+
+                foreach (var listener in listeners)
                     listener.UpdatePulseProximity(prox);
 
                 // Too late, no matter what stage

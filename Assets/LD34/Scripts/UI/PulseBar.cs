@@ -8,11 +8,11 @@ namespace LD34.UI {
         public Color activeColor;
         public Blinker finishBlinker, failBlinker;
 
-        public void ActivatePulse() {
+        public void ActivatePulse(float timing) {
             GetComponent<CanvasRenderer>().SetColor(activeColor);
         }
 
-        public void FinishPulse() {
+        public void FinishPulse(float timing) {
             finishBlinker.Blink();
             Destroy(gameObject, finishBlinker.duration);
         }

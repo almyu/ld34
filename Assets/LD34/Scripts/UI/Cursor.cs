@@ -20,7 +20,7 @@ namespace LD34.UI {
             desiredColor = normalColor;
         }
 
-        public void ActivatePulse() {
+        public void ActivatePulse(float timing) {
             color = hitColor;
             desiredColor = activeColor;
         }
@@ -30,7 +30,7 @@ namespace LD34.UI {
             desiredColor = normalColor;
         }
 
-        public void FinishPulse() {
+        public void FinishPulse(float timing) {
             color = hitColor;
             desiredColor = normalColor;
         }

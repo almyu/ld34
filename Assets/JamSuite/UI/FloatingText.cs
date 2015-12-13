@@ -34,11 +34,11 @@ namespace JamSuite.UI {
 
 
 
-        public void Spawn(Vector3 worldPos, int value) {
-            Spawn(worldPos, "{0}", value);
+        public Text Spawn(Vector3 worldPos, int value) {
+            return Spawn(worldPos, "{0}", value);
         }
 
-        public void Spawn(Vector3 worldPos, string format, int value) {
+        public Text Spawn(Vector3 worldPos, string format, int value) {
             var obj = Instantiate();
             obj.SetActive(true);
 
@@ -48,6 +48,8 @@ namespace JamSuite.UI {
             TuneTransform(xf, WorldToScreenPoint(worldPos));
             TuneText(text, format, value);
             StartCoroutine(Animate(worldPos, xf, text));
+
+            return text;
         }
 
 
