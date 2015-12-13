@@ -9,6 +9,8 @@ namespace LD34 {
         public Timeline timeline;
         public float time;
         public int pulseIndex;
+
+        [HideInInspector]
         public bool pulseStarted;
 
         public FloatEvent onPulse;

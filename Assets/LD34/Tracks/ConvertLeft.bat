@@ -1,0 +1,1 @@
+Convert.bat TestLeft.mid
