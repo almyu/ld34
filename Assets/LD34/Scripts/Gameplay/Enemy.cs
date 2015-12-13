@@ -29,6 +29,8 @@ namespace LD34 {
             mode = Mode.Attack;
         }
 
+        public void MissPulse() {}
+
         public void UpdatePulseProximity(float dt) {}
 
         private void Update() {

@@ -4,14 +4,8 @@ using System.Collections.Generic;
 
 namespace LD34 {
 
-    public interface IInputMatchListener {
-        void MissPulse();
-        void ActivatePulse(Pulse pulse);
-        void FinishPulse(Pulse pulse);
-        void FailPulse(Pulse pulse);
-    }
-
     public interface IPulseListener {
+        void MissPulse();
         void ActivatePulse();
         void FinishPulse();
         void FailPulse();
@@ -36,10 +30,17 @@ namespace LD34 {
 
         public PulseAddedEvent onPulseAdded;
 
-        public List<IInputMatchListener> listeners = new List<IInputMatchListener>();
-
+        public List<GameObject> listenerObjects = new List<GameObject>();
 
         private Queue<Pulse> queue = new Queue<Pulse>();
+        private List<IPulseListener> listeners = new List<IPulseListener>();
+
+        private void Awake() {
+            foreach (var lob in listenerObjects) {
+                var listener = lob.GetComponent<IPulseListener>();
+                if (listener != null) listeners.Add(listener);
+            }
+        }
 
         public void AddPulse(float length) {
             AddPulse(Time.timeSinceLevelLoad + latency, length);
@@ -60,6 +61,7 @@ namespace LD34 {
             if (queue.Count == 0) {
                 foreach (var listener in listeners)
                     listener.MissPulse();
+
                 return;
             }
 
@@ -67,8 +69,12 @@ namespace LD34 {
 
             // Too early, don't discard
             if (Time.timeSinceLevelLoad < pulse.actionTime) {
+                foreach (var listener in pulse.listeners)
+                    listener.MissPulse();
+
                 foreach (var listener in listeners)
                     listener.MissPulse();
+
                 return;
             }
 
@@ -76,7 +82,7 @@ namespace LD34 {
             pulse.actionTime += pulse.length;
 
             foreach (var listener in listeners)
-                listener.ActivatePulse(pulse);
+                listener.ActivatePulse();
 
             foreach (var listener in pulse.listeners)
                 listener.ActivatePulse();
@@ -96,7 +102,7 @@ namespace LD34 {
                     listener.FailPulse();
 
                 foreach (var listener in listeners)
-                    listener.FailPulse(pulse);
+                    listener.FailPulse();
 
                 queue.Dequeue();
                 return;
@@ -106,7 +112,7 @@ namespace LD34 {
                 listener.FinishPulse();
 
             foreach (var listener in listeners)
-                listener.FinishPulse(pulse);
+                listener.FinishPulse();
 
             queue.Dequeue();
         }
@@ -129,7 +135,7 @@ namespace LD34 {
                         listener.FailPulse();
 
                     foreach (var listener in listeners)
-                        listener.FailPulse(pulse);
+                        listener.FailPulse();
 
                     queue.Dequeue();
                 }

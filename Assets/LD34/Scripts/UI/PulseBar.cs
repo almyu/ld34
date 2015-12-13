@@ -22,6 +22,8 @@ namespace LD34.UI {
             Destroy(gameObject, failBlinker.duration);
         }
 
+        public void MissPulse() {}
+
         public void UpdatePulseProximity(float dt) {}
     }
 }

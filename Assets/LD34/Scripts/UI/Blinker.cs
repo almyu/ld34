@@ -21,12 +21,16 @@ namespace LD34.UI {
         }
 
         public void Blink() {
-            StartCoroutine(DoBlink());
+            StartCoroutine(DoBlink(Color.white));
         }
 
-        private IEnumerator DoBlink() {
+        public void Blink(Color tint) {
+            StartCoroutine(DoBlink(tint));
+        }
+
+        private IEnumerator DoBlink(Color tint) {
             for (var t = 0f; t <= duration; t += Time.deltaTime) {
-                cachedRenderer.SetColor(gradient.Evaluate(t / duration));
+                cachedRenderer.SetColor(gradient.Evaluate(t / duration) * tint);
                 yield return null;
             }
             if (normallyTransparent) cachedRenderer.SetColor(Color.clear);
