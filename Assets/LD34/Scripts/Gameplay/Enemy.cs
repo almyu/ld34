@@ -32,7 +32,8 @@ namespace LD34 {
         private void Update() {
             if (mode == Mode.Approach) {
                 var pos = transform.position;
-                transform.position = Vector3.MoveTowards(pos, destiantion, speed * Time.deltaTime);
+                //transform.position = Vector3.MoveTowards(pos, destiantion, speed * Time.deltaTime);
+                transform.position += Vector3.left * speed * Time.deltaTime;
                 velocity = (transform.position - pos) / Time.deltaTime;
             }
             if (mode == Mode.Fall) {
