@@ -12,7 +12,7 @@ namespace LD34 {
             var prefab = RollEnemyPrefab(pulse.length);
             var enemy = Instantiate(prefab);
 
-            var dist = (pulse.actionTime - Time.timeSinceLevelLoad) * enemy.speed; // shift by half error?
+            var dist = (pulse.actionTime - Time.timeSinceLevelLoad + InputMatcher.halfMaxError) * enemy.speed;
             enemy.transform.position = new Vector2(dist, RollSpawnHeight());
 
             pulse.listeners.Add(enemy);

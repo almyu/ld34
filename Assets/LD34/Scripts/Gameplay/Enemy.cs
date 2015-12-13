@@ -8,14 +8,15 @@ namespace LD34 {
 
         public UnityEvent onHit, onDeath;
 
-        public float speed = 10f;
+        public float speed = 3f;
+        public float speedAfterHit = 1f;
         public float deathDelay = 1f;
 
         private bool charge;
         private Vector2 velocity;
 
         public void ActivatePulse(float timing) {
-            speed *= 0.5f;
+            speed = speedAfterHit;
         }
 
         public void FinishPulse(float timing) {

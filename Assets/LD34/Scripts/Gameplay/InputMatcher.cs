@@ -20,10 +20,15 @@ namespace LD34 {
 
     public class InputMatcher : MonoBehaviour {
 
+        public static float maxError = 0.64f;
+
+        public static float halfMaxError {
+            get { return maxError * 0.5f; }
+        }
+
         public string inputButton = "Fire1";
 
         public float latency = 6f;
-        public float maxError = 0.1f;
 
         [System.Serializable]
         public class PulseAddedEvent : UnityEvent<Pulse> {}
@@ -123,7 +128,7 @@ namespace LD34 {
 
         private float CalcTiming(float actionTime, bool abs = true) {
             var dt = Time.timeSinceLevelLoad - actionTime;
-            var timing = dt - maxError * 0.5f;
+            var timing = dt - halfMaxError;
             return abs ? Mathf.Abs(timing) : timing;
         }
 
