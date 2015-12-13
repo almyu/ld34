@@ -1,56 +1,50 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 namespace LD34 {
 
     public class Enemy : MonoBehaviour, IPulseListener {
 
-        public enum Mode {
-            Approach,
-            Fall,
-            Attack
-        }
+        public UnityEvent onHit, onDeath;
 
-        [HideInInspector]
-        public Mode mode;
-
-        public Vector3 destiantion;
         public float speed = 10f;
+        public float deathDelay = 1f;
 
+        private bool charge;
         private Vector2 velocity;
 
-        public void ActivatePulse() {}
+        public void ActivatePulse() {
+            speed *= 0.5f;
+        }
 
         public void FinishPulse() {
-            mode = Mode.Fall;
+            onHit.Invoke();
+            StartCoroutine(DoScheduleDeath());
         }
 
         public void FailPulse() {
-            mode = Mode.Attack;
+            charge = true;
         }
 
         public void MissPulse() {}
 
         public void UpdatePulseProximity(float dt) {}
 
+        private IEnumerator DoScheduleDeath() {
+            yield return new WaitForSeconds(deathDelay);
+            onDeath.Invoke();
+        }
+
         private void Update() {
-            if (mode == Mode.Approach) {
+            if (!charge) {
                 var pos = transform.position;
-                //transform.position = Vector3.MoveTowards(pos, destiantion, speed * Time.deltaTime);
                 transform.position += Vector3.left * speed * Time.deltaTime;
                 velocity = (transform.position - pos) / Time.deltaTime;
             }
-            if (mode == Mode.Fall) {
-                velocity.y -= 10f * Time.deltaTime;
-                transform.position += (Vector3)(velocity * Time.deltaTime);
-
-                //if (transform.position.y < 100f) Destroy(gameObject);
-            }
-            if (mode == Mode.Attack) {
+            else {
                 velocity.x -= 20f * Time.deltaTime;
                 transform.position += (Vector3)(velocity * Time.deltaTime);
-
-                //if (transform.position.x < 100f) Destroy(gameObject);
             }
         }
     }
