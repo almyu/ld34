@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 427152}
   - 212: {fileID: 21262684}
+  - 111: {fileID: 11168838}
   m_Layer: 0
   m_Name: RocketLight
   m_TagString: Untagged
@@ -85,6 +86,21 @@ Transform:
   - {fileID: 427152}
   m_Father: {fileID: 412710}
   m_RootOrder: 0
+--- !u!111 &11168838
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123852}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 87785337631ff6648a17f1d6a0abe3cf, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!212 &21241026
 SpriteRenderer:
   m_ObjectHideFlags: 1

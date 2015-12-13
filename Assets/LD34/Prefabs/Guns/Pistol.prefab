@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 427822}
   - 212: {fileID: 21293964}
+  - 111: {fileID: 11176914}
   m_Layer: 0
   m_Name: PistolLight
   m_TagString: Untagged
@@ -85,6 +86,21 @@ Transform:
   - {fileID: 494246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!111 &11176914
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109208}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: db1852453d2106449882690ef8facd83, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: db1852453d2106449882690ef8facd83, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!212 &21287750
 SpriteRenderer:
   m_ObjectHideFlags: 1

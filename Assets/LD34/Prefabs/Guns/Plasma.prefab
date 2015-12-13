@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 462998}
   - 212: {fileID: 21277906}
+  - 111: {fileID: 11116340}
   m_Layer: 0
   m_Name: PlasmaLight
   m_TagString: Untagged
@@ -85,6 +86,21 @@ Transform:
   - {fileID: 422952}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!111 &11116340
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133660}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3a18ac421dc2ec2438798b921540298c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3a18ac421dc2ec2438798b921540298c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!212 &21217360
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -138,7 +154,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 03affa201b7e32b47b15ec0640df6c2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
