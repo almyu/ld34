@@ -23,7 +23,7 @@ namespace LD34 {
         }
 
         public void SetLength(float length) {
-            beam.transform.localScale = new Vector3(length, 1, 1);
+            beam.transform.localScale = beam.transform.localScale.WithX(length * beam.sprite.pixelsPerUnit);
         }
     }
 }
