@@ -197,7 +197,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fa7976af45c355b459986de213de4f6f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dd0ab2e9202f47245a938986ed857166, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 665298953}
-  sampleLength: .25
+  sampleLength: .1875
   samplesPerChunk: 16
   repeatStart: 0
   repeatEnd: 16
@@ -299,6 +299,10 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 1, a: 1}
     description: Hold Right
     merge: 1
+  - hotkey: SwapWeapon
+    color: {r: 0, g: 1, b: 0, a: 1}
+    description: Take Random Weapon
+    merge: 0
 --- !u!4 &665298955
 Transform:
   m_ObjectHideFlags: 0

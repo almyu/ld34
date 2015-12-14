@@ -9,6 +9,7 @@ namespace LD34 {
 
     public class TrackBeats : ScriptableObject {
 
+        public float bpm = 120;
         public int[] beats;
 
 #if UNITY_EDITOR

@@ -4,6 +4,8 @@ namespace LD34 {
 
     public class Recorder : MonoBehaviour {
 
+        private const float epsilon = 0.002f;
+
         public AudioSource source;
         public float sampleLength = 0.25f;
         public int samplesPerChunk = 16;
@@ -41,6 +43,10 @@ namespace LD34 {
             beats = new int[Mathf.FloorToInt(track.length / sampleLength)];
 
             trackHeight = eventHeight * events.Length;
+
+#if UNITY_EDITOR
+            Load();
+#endif
         }
 
         private void ClearBeats(int at, int count) {
@@ -49,7 +55,7 @@ namespace LD34 {
         }
 
         private int now {
-            get { return Mathf.FloorToInt(source.time / sampleLength); }
+            get { return Mathf.FloorToInt((source.time + epsilon) / sampleLength); }
             set { source.time = value * sampleLength; }
         }
 
@@ -58,7 +64,7 @@ namespace LD34 {
         }
 
         private int Snap(float time) {
-            return Mathf.FloorToInt(source.time / sampleLength);
+            return Mathf.FloorToInt((source.time + epsilon) / sampleLength);
         }
 
         private int SnapInput(float time) {
@@ -130,30 +136,35 @@ namespace LD34 {
             GUI.DrawTexture(new Rect(pos - new Vector2(width * 0.5f, 0), new Vector2(width, height)), Texture2D.whiteTexture);
         }
 
-        private void EditorMenuGUI() {
 #if UNITY_EDITOR
-            if (GUI.Button(new Rect(10, 10, 100, 50), "Load")) {
-                var asset = TrackBeats.LoadNextToTrack(track);
-                if (asset) {
-                    beats = asset.beats;
-                    Debug.Log("Loaded");
-                }
+        private void Load() {
+            var asset = TrackBeats.LoadNextToTrack(track);
+            if (asset) {
+                beats = asset.beats;
+                sampleLength = 30f / asset.bpm;
+                Debug.LogFormat("Loaded {2} (bpm: {0}, beats: {1})", asset.bpm, beats.Length, asset.name);
             }
-
-            if (GUI.Button(new Rect(110, 10, 100, 50), "Save")) {
-                var asset = TrackBeats.LoadNextToTrack(track);
-                if (!asset) asset = TrackBeats.CreateNextToTrack(track);
-
-                asset.beats = beats;
-
-                UnityEditor.EditorUtility.SetDirty(asset);
-                UnityEditor.AssetDatabase.SaveAssets();
-            }
-#endif
         }
 
+        private void Save() {
+            var asset = TrackBeats.LoadNextToTrack(track);
+            if (!asset) asset = TrackBeats.CreateNextToTrack(track);
+
+            asset.beats = beats;
+            asset.bpm = 30f / sampleLength;
+
+            UnityEditor.EditorUtility.SetDirty(asset);
+            UnityEditor.AssetDatabase.SaveAssets();
+
+            Debug.LogFormat("Saved {2} (bpm: {0}, beats: {1})", asset.bpm, asset.beats.Length, asset.name);
+        }
+#endif
+
         private void OnGUI() {
-            EditorMenuGUI();
+#if UNITY_EDITOR
+            if (GUI.Button(new Rect(10, 10, 100, 50), "Load")) Load();
+            if (GUI.Button(new Rect(110, 10, 100, 50), "Save")) Save();
+#endif
 
             var screen = new Vector2(Screen.width, Screen.height);
             var center = screen * 0.5f;
