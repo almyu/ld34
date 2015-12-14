@@ -87,7 +87,40 @@ PlayerSettings:
     Others: 1
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 8300000, guid: fa7976af45c355b459986de213de4f6f, type: 3}
+  - {fileID: 11400000, guid: c13e9c833befb8447a77e54cf6e59e84, type: 2}
+  - {fileID: 8300000, guid: e877b672225614d44ab734f0ad7a7d4c, type: 3}
+  - {fileID: 11400000, guid: e0e2d589c38733743ab65db65fcfba3d, type: 2}
+  - {fileID: 8300000, guid: dd0ab2e9202f47245a938986ed857166, type: 3}
+  - {fileID: 11400000, guid: cc20deb76d541ac4daf9c57f079add36, type: 2}
+  - {fileID: 140418, guid: 1aed5bc38c56f2141babd86c722de833, type: 2}
+  - {fileID: 148512, guid: 1cf1bfc5100579744ad1e114e651c2b6, type: 2}
+  - {fileID: 149118, guid: 3caca12cad0344c4fb7867a0f19a55cc, type: 2}
+  - {fileID: 2800000, guid: 824726d7002db7a4db9241bbc90f2c37, type: 3}
+  - {fileID: 2800000, guid: 5ed42d70c6a61224e8235ba8447e6398, type: 3}
+  - {fileID: 2800000, guid: 9628f9c02fafa0140966b93ac24cad85, type: 3}
+  - {fileID: 2800000, guid: d8661801a5aaaae409e75de49b31ef2e, type: 3}
+  - {fileID: 2800000, guid: 157e3ad28e55b6543b3096a89ed9f27d, type: 3}
+  - {fileID: 2800000, guid: 7a657b239c9dae14d986a8f33183a650, type: 3}
+  - {fileID: 2800000, guid: 8c67e063b6cbc594f87b746ff30039b6, type: 3}
+  - {fileID: 2800000, guid: d3caae93ca0fbcf4987dad6985473b0c, type: 3}
+  - {fileID: 2800000, guid: b06f8024d9fc82547a419a1bf175f46f, type: 3}
+  - {fileID: 2800000, guid: 9b533e943e2d7c741a7f65252d48ca00, type: 3}
+  - {fileID: 2800000, guid: 3faece45c63c4fb4385d545a116cf0e9, type: 3}
+  - {fileID: 2800000, guid: d7cb73b8ae219a24e89e336fee9df40b, type: 3}
+  - {fileID: 2800000, guid: 2815a47c6c54f9344a6b392ff1f2ca29, type: 3}
+  - {fileID: 2800000, guid: d5790a2249f5c5d4bba0cc64232749b3, type: 3}
+  - {fileID: 2800000, guid: bb464e63debd15b44b10ea6024f7f553, type: 3}
+  - {fileID: 2800000, guid: 5c2149a4e454cdc4b8eec995bf0bf244, type: 3}
+  - {fileID: 2800000, guid: f5b3954540c3d0f4aa3f69094161aacb, type: 3}
+  - {fileID: 2800000, guid: b08584184f2cc044c9a610d05a0a744c, type: 3}
+  - {fileID: 2800000, guid: a47f45987d7df944882be5063f889a0c, type: 3}
+  - {fileID: 2800000, guid: 9dad6e799d9c96743b00ef7d5da11f12, type: 3}
+  - {fileID: 2800000, guid: a6be65fb4b5b3fe4ea5a7b963b5e25a0, type: 3}
+  - {fileID: 2800000, guid: 9b8898ec7242ea24a9efb2e8aa570ce8, type: 3}
+  - {fileID: 2800000, guid: 1cea874e93af5d94d938912df4e3e540, type: 3}
+  - {fileID: 2800000, guid: 3aea7fff3dff08d468433001736cc8dc, type: 3}
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
@@ -161,7 +194,13 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 128
+      m_Height: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   webPlayerTemplate: APPLICATION:Default

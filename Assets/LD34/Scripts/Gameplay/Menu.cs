@@ -22,5 +22,9 @@ namespace LD34 {
         public void SetBeats(TrackBeats beats_) {
             beats = beats_;
         }
+
+        public void Load() {
+            Application.LoadLevel(Application.loadedLevel + 1);
+        }
     }
 }
