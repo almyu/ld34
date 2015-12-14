@@ -44,7 +44,7 @@ namespace LD34 {
                 if (hadLong) {
                     if (hasLong) continue;
 
-                    pulses.Add(new Timeline.Pulse { position = position, length = position - longStart });
+                    pulses.Add(new Timeline.Pulse { position = longStart, length = position - longStart });
                     hadLong = false;
                     continue;
                 }
