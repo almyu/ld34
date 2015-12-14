@@ -395,7 +395,7 @@ RectTransform:
   - {fileID: 2059625644}
   - {fileID: 911401992}
   - {fileID: 1922271618}
-  m_Father: {fileID: 700004174}
+  m_Father: {fileID: 1733018731}
   m_RootOrder: 0
   m_AnchorMin: {x: .200000003, y: .100000001}
   m_AnchorMax: {x: .899999976, y: .600000024}
@@ -762,8 +762,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 291599030}
-  - {fileID: 757523290}
+  - {fileID: 1733018731}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -852,7 +851,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 700004174}
+  m_Father: {fileID: 1733018731}
   m_RootOrder: 1
   m_AnchorMin: {x: .400000006, y: .699999988}
   m_AnchorMax: {x: .899999976, y: .899999976}
@@ -890,7 +889,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAMENAME
+  m_Text: CYBERFUNK
 --- !u!222 &757523292
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1746,6 +1745,40 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1719383199}
+--- !u!1 &1733018730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1733018731}
+  m_Layer: 5
+  m_Name: Interface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1733018731
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733018730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 291599030}
+  - {fileID: 757523290}
+  m_Father: {fileID: 700004174}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &1793088744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,6 +2023,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1960100550}
   - 212: {fileID: 1960100551}
+  - 111: {fileID: 1960100552}
   m_Layer: 0
   m_Name: HeroGlowColor
   m_TagString: Untagged
@@ -2037,6 +2071,21 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eb296be686b091a4fac0e10438e8d2bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!111 &1960100552
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1960100549}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3172758c46a86ed49ac7f5d938bccc9a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3172758c46a86ed49ac7f5d938bccc9a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2059625643
 GameObject:
   m_ObjectHideFlags: 0
