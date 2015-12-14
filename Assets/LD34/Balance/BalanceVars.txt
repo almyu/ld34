@@ -1,2 +1,2 @@
-InputMatcher.maxError = 0.16
+InputMatcher.maxError = 0.32
 InputMatcher.longPulse = 1.0
