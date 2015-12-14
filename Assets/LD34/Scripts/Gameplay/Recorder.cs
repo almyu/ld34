@@ -167,7 +167,7 @@ namespace LD34 {
 #endif
 
             var screen = new Vector2(Screen.width, Screen.height);
-            var center = screen * 0.5f;
+            var center = new Vector2(screen.x * 0.5f, 100f);
 
             GUI.color = Color.white;
             DrawVerticalLine(new Vector2(center.x, 0), screen.y);
