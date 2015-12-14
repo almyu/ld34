@@ -9,26 +9,23 @@ namespace LD34 {
 
     public class TimelinePlayer : MonoBehaviour {
 
-        public TrackBeats beats;
         public int shortBeatEventIndex;
         public int longBeatEventIndex;
         public float lookahead = 6f;
-        public float shift = -0.05f;
+        public float shift = 0.05f;
 
         private int shortFlag, longFlag;
         private List<Timeline.Pulse> pulses = new List<Timeline.Pulse>();
         private int pulseIndex;
-        private float time;
 
         public PulseEvent onPulse;
         public UnityEvent onTimelineEnd;
 
         private void Awake() {
-            time = lookahead;
-
             shortFlag = 1 << shortBeatEventIndex;
             longFlag = 1 << longBeatEventIndex;
 
+            var beats = Menu.beats;
             var sampleLength = 30f / beats.bpm;
 
             var hadLong = false;
@@ -68,7 +65,7 @@ namespace LD34 {
             }
 
             var pulse = pulses[pulseIndex];
-            time += Time.deltaTime;
+            var time = TimeSync.time + lookahead;
 
             if (pulse.position <= time) {
                 var latency = time - pulse.position;
