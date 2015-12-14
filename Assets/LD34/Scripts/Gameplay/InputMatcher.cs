@@ -21,14 +21,13 @@ namespace LD34 {
     public class InputMatcher : MonoBehaviour {
 
         public static float maxError = 0.64f;
+        public static float longPulse = 1f;
 
         public static float halfMaxError {
             get { return maxError * 0.5f; }
         }
 
         public string inputButton = "Fire1";
-
-        public float latency = 6f;
 
         [System.Serializable]
         public class PulseAddedEvent : UnityEvent<Pulse> {}
@@ -47,15 +46,11 @@ namespace LD34 {
             }
         }
 
-        public void AddPulse(float length) {
-            AddPulse(Time.timeSinceLevelLoad + latency, length);
-        }
-
         public void AddPulse(float time, float length) {
             var pulse = new Pulse {
                 activated = false,
                 actionTime = time,
-                length = length,
+                length = length >= longPulse ? length : 0f,
                 listeners = new List<IPulseListener>()
             };
             queue.Enqueue(pulse);
@@ -93,6 +88,16 @@ namespace LD34 {
 
             foreach (var listener in pulse.listeners)
                 listener.ActivatePulse(timing);
+
+            if (pulse.length < longPulse) {
+                foreach (var listener in listeners)
+                    listener.FinishPulse(timing);
+
+                foreach (var listener in pulse.listeners)
+                    listener.FinishPulse(timing);
+
+                queue.Dequeue();
+            }
         }
 
         public void EndInput() {

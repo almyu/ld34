@@ -478,9 +478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: e3c3413cb5cb65e4db3cb996976e0b52, type: 2}
-  time: 0
   pulseIndex: 0
-  pulseStarted: 0
+  offset: 6
+  time: 0
   onPulse:
     m_PersistentCalls:
       m_Calls:
@@ -495,17 +495,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: JamSuite.Events.FloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onPulseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onPulseEnd:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: LD34.PulseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onTimelineEnd:
     m_PersistentCalls:
@@ -556,7 +546,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 32, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &601407415
@@ -571,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulseTemplate: {fileID: 612609368}
-  pixelsPerSecond: 100
+  pixelsPerSecond: 200
 --- !u!222 &601407416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -774,6 +764,115 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 612609364}
+--- !u!1 &660323274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 660323276}
+  - 114: {fileID: 660323275}
+  m_Layer: 0
+  m_Name: BalanceVars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &660323275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660323274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075cdc47b5314564baf7be280aa86875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 4900000, guid: 54a5191f83d308a4bb36e6be06516468, type: 3}
+  loadOnAwake: 1
+  reportStatus: 0
+--- !u!4 &660323276
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660323274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+--- !u!1 &712078705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 712078707}
+  - 114: {fileID: 712078706}
+  m_Layer: 0
+  m_Name: Beat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &712078706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 712078705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b82a8b07eb95c846b98cabb06977e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPulse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1895999874}
+        m_MethodName: AddPulse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: LD34.PulseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  offset: 6
+  layers:
+  - offset: 0
+    bpm: 60
+  - offset: 1.5
+    bpm: 60
+  - offset: 1.60000002
+    bpm: 60
+  - offset: 1.70000005
+    bpm: 60
+  - offset: 1.79999995
+    bpm: 60
+--- !u!4 &712078707
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 712078705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &722255147
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,9 +901,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 8f5ea5a5516629d4ca67c373af5f439b, type: 2}
-  time: 0
   pulseIndex: 0
-  pulseStarted: 0
+  offset: 6
+  time: 0
   onPulse:
     m_PersistentCalls:
       m_Calls:
@@ -819,17 +918,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: JamSuite.Events.FloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onPulseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onPulseEnd:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: LD34.PulseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onTimelineEnd:
     m_PersistentCalls:
@@ -1104,9 +1193,9 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 32, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
-  m_Pivot: {x: 0, y: .5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1400267759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,7 +1208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulseTemplate: {fileID: 1700412303}
-  pixelsPerSecond: 100
+  pixelsPerSecond: 200
 --- !u!222 &1400267761
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1234,7 +1323,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 64, y: 128}
+  m_SizeDelta: {x: 16, y: 256}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1692314304
 GameObject:
@@ -1299,10 +1388,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1483822730}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 64, y: 128}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1692314308
 MonoBehaviour:
@@ -1544,7 +1633,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputButton: Left
-  latency: 6
   onPulseAdded:
     m_PersistentCalls:
       m_Calls:
@@ -1615,7 +1703,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputButton: Right
-  latency: 6
   onPulseAdded:
     m_PersistentCalls:
       m_Calls:

@@ -1,48 +1,37 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using JamSuite.Events;
 
 namespace LD34 {
+
+    [System.Serializable]
+    public class PulseEvent : UnityEvent<float, float> {}
 
     public class TimelinePlayer : MonoBehaviour {
 
         public Timeline timeline;
-        public float time;
         public int pulseIndex;
+        public float offset = 6f;
 
         [HideInInspector]
-        public bool pulseStarted;
+        public float time;
 
-        public FloatEvent onPulse;
-        public UnityEvent onPulseStart, onPulseEnd, onTimelineEnd;
-
-        public Timeline.Pulse pulse {
-            get { return timeline.pulses[pulseIndex]; }
-        }
+        public PulseEvent onPulse;
+        public UnityEvent onTimelineEnd;
 
         private void Update() {
+            if (pulseIndex >= timeline.pulses.Length) {
+                onTimelineEnd.Invoke();
+                enabled = false;
+                return;
+            }
+
+            var pulse = timeline.pulses[pulseIndex];
             time += Time.deltaTime;
 
-            if (pulse.position <= time && !pulseStarted) {
-                pulseStarted = true;
-                onPulseStart.Invoke();
-                onPulse.Invoke(pulse.length);
-            }
-
-            if (pulse.position + pulse.clampedLength <= time) {
-                onPulseEnd.Invoke();
-                pulseStarted = false;
-                NextPulse();
-            }
-        }
-
-        public void NextPulse() {
-            if (pulseIndex + 1 < timeline.pulses.Length)
+            if (pulse.position <= time) {
+                var latency = time - pulse.position;
+                onPulse.Invoke(Time.timeSinceLevelLoad - latency + offset, pulse.length);
                 ++pulseIndex;
-            else {
-                onTimelineEnd.Invoke();
-                pulseIndex = 0;
-                time = 0f;
             }
         }
     }

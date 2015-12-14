@@ -17,7 +17,7 @@ namespace LD34.UI {
             var bar = Instantiate(pulseTemplate);
             var xf = bar.GetComponent<RectTransform>();
 
-            xf.anchoredPosition = Vector2.right * pixelsPerSecond * pulse.actionTime;
+            xf.anchoredPosition = Vector2.right * pixelsPerSecond * (pulse.actionTime + InputMatcher.halfMaxError);
             xf.sizeDelta = xf.sizeDelta.WithX(pixelsPerSecond * Mathf.Max(Timeline.minLength, pulse.length));
             xf.SetParent(transform, false);
             xf.gameObject.SetActive(true);
