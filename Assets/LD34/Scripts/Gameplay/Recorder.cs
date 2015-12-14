@@ -50,12 +50,24 @@ namespace LD34 {
         }
 
         private int now {
-            get { return Mathf.RoundToInt(source.time / sampleLength); } // HACK
+            get { return Mathf.FloorToInt(source.time / sampleLength); }
             set { source.time = value * sampleLength; }
         }
 
         private int nowCompensated {
-            get { return Mathf.RoundToInt((source.time + Time.deltaTime * 0.5f) / sampleLength); }
+            get { return Mathf.FloorToInt((source.time + Time.deltaTime * 0.5f) / sampleLength); }
+        }
+
+        private int Snap(float time) {
+            return Mathf.FloorToInt(source.time / sampleLength);
+        }
+
+        private int SnapInput(float time) {
+            return Snap(time + Time.deltaTime * 0.5f);
+        }
+
+        private int GetChunkStart(int at) {
+            return at / samplesPerChunk * samplesPerChunk;
         }
 
         private bool GetEventFlag(int at, int eventIndex) {
@@ -75,7 +87,7 @@ namespace LD34 {
             if (Input.GetKeyDown(pauseHotkey)) {
                 if (source.isPlaying) {
                     source.Pause();
-                    now = now;
+                    now = Snap(source.time);
                 }
                 else source.UnPause();
             }
@@ -94,24 +106,25 @@ namespace LD34 {
                 repeatEnd += samplesPerChunk;
             }
             if (Input.GetKeyDown(resetHotkey))
-                ClearBeats(now / samplesPerChunk, samplesPerChunk);
+                ClearBeats(GetChunkStart(nowCompensated), samplesPerChunk);
 
             if (Input.GetKeyDown(toggleRepeatHotkey)) {
                 if (repeatStart < repeatEnd)
                     repeatEnd = repeatStart;
                 else {
-                    repeatStart = nowCompensated / samplesPerChunk;
+                    repeatStart = GetChunkStart(nowCompensated);
                     repeatEnd = repeatStart + samplesPerChunk;
                 }
             }
 
-            if (repeatStart < repeatEnd && source.time + Time.deltaTime >= repeatEnd * sampleLength) {
+            if (repeatStart < repeatEnd && nowCompensated >= repeatEnd) {
+                //Debug.Log(source.time);
                 now = repeatStart;
             }
 
             for (int i = 0; i < events.Length; ++i)
                 if (Input.GetButtonDown(events[i].hotkey))
-                    ToggleEventFlag(nowCompensated, i);
+                    ToggleEventFlag(SnapInput(source.time), i);
         }
 
         private void DrawVerticalLine(Vector2 pos, float height, float width = 1) {

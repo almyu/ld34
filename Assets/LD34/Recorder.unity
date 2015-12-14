@@ -197,7 +197,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e877b672225614d44ab734f0ad7a7d4c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fa7976af45c355b459986de213de4f6f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 665298953}
-  sampleLength: .1875
+  sampleLength: .25
   samplesPerChunk: 16
   repeatStart: 0
   repeatEnd: 16
