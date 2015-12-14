@@ -24,6 +24,7 @@ namespace LD34 {
             var dir = (point.WithZ(0) - arm.position.WithZ(0)).normalized;
 
             GetArm(hand).right = dir;
+            GetHand(hand).BroadcastMessage("Fire", point, SendMessageOptions.DontRequireReceiver);
         }
     }
 }
