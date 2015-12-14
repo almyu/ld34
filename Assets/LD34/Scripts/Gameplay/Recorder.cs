@@ -9,9 +9,10 @@ namespace LD34 {
         public float chunkLength = 2f;
         public int chunkIndex = 0;
         public float snap = 0.25f;
-        public bool snapAntiLag = true;
         public float pixelsPerSecond = 100f;
         public KeyCode nextHotkey, prevHotkey, resetHotkey;
+        public KeyCode pauseHotkey = KeyCode.Space;
+        public KeyCode seekForwardHotkey = KeyCode.Equals, seekBackHotkey = KeyCode.Minus;
 
         [System.Serializable]
         public struct Event {
@@ -69,29 +70,55 @@ namespace LD34 {
         }
 
         private void Update() {
-            if (Input.GetKeyDown(nextHotkey)) Advance(1);
+            var ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+
+            if (Input.GetKeyDown(pauseHotkey)) {
+                if (source.isPlaying) {
+                    source.Pause();
+                    Seek(0);
+                }
+                else source.UnPause();
+            }
+
+            if (Input.GetKeyDown(seekForwardHotkey)) Seek(1);
+            if (Input.GetKeyDown(seekBackHotkey)) Seek(-1);
+
+            if (Input.GetKeyDown(nextHotkey)) Advance(1, ctrl);
             if (Input.GetKeyDown(prevHotkey)) Advance(-1);
             if (Input.GetKeyDown(resetHotkey)) chunks[chunkIndex].Reset();
 
-            if (source.time + Time.deltaTime >= chunks[chunkIndex].end)
+            if (!source.isPlaying)
+                chunkIndex = Mathf.FloorToInt(source.time / chunkLength);
+
+            else if (source.time + Time.deltaTime >= chunks[chunkIndex].end)
                 source.time = chunks[chunkIndex].start;
 
             for (int i = 0; i < events.Length; ++i) {
                 if (!Input.GetButtonDown(events[i].hotkey)) continue;
 
                 var chunk = chunks[chunkIndex];
-                var time = Snap(source.time - chunk.start);
+                var time = SnapInput(source.time - chunk.start);
                 chunks[chunkIndex].AddBeat(time, i);
             }
         }
 
         private float Snap(float time) {
-            if (snapAntiLag) time -= Time.deltaTime * 0.5f;
             return Mathf.Round(time / snap) * snap;
         }
 
-        public void Advance(int numChunks) {
-            chunkIndex = Mathf.Clamp(chunkIndex + numChunks, 0, chunks.Length);
+        private float SnapInput(float time) {
+            return Snap(time - Time.deltaTime * 0.5f);
+        }
+
+        public void Seek(int numSnaps) {
+            source.time = Mathf.Max(0f, Snap(source.time + numSnaps * snap));
+        }
+
+        public void Advance(int numChunks, bool instantly = false) {
+            chunkIndex = Mathf.Clamp(chunkIndex + numChunks, 0, chunks.Length - 1);
+
+            if (instantly || !source.isPlaying)
+                source.time = chunks[chunkIndex].start;
         }
 
         private void DrawVerticalLine(Vector2 pos, float height, float width = 1) {
@@ -104,7 +131,7 @@ namespace LD34 {
 
             var trackHeight = 100f;
             var headerHeight = 20f;
-            var snapHeight = 15f;
+            var snapHeight = 10f;
             var eventHeight = trackHeight / events.Length;
 
             GUI.color = Color.white;
@@ -138,8 +165,9 @@ namespace LD34 {
                 for (int i = 0, n = Mathf.FloorToInt(chunkLength / snap); i < n; ++i) {
                     var barTime = chunkStart + i * snap;
                     var barX = barTime * pixelsPerSecond;
+                    var barH = i % 4 == 0 ? snapHeight * 2f : snapHeight;
 
-                    DrawVerticalLine(center + new Vector2(barX, -headerHeight), snapHeight);
+                    DrawVerticalLine(center + new Vector2(barX, -headerHeight), barH);
                 }
 
                 foreach (var beat in chunk.beats) {
