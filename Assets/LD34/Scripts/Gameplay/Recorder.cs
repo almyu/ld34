@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace LD34 {
 
@@ -131,7 +130,31 @@ namespace LD34 {
             GUI.DrawTexture(new Rect(pos - new Vector2(width * 0.5f, 0), new Vector2(width, height)), Texture2D.whiteTexture);
         }
 
+        private void EditorMenuGUI() {
+#if UNITY_EDITOR
+            if (GUI.Button(new Rect(10, 10, 100, 50), "Load")) {
+                var asset = TrackBeats.LoadNextToTrack(track);
+                if (asset) {
+                    beats = asset.beats;
+                    Debug.Log("Loaded");
+                }
+            }
+
+            if (GUI.Button(new Rect(110, 10, 100, 50), "Save")) {
+                var asset = TrackBeats.LoadNextToTrack(track);
+                if (!asset) asset = TrackBeats.CreateNextToTrack(track);
+
+                asset.beats = beats;
+
+                UnityEditor.EditorUtility.SetDirty(asset);
+                UnityEditor.AssetDatabase.SaveAssets();
+            }
+#endif
+        }
+
         private void OnGUI() {
+            EditorMenuGUI();
+
             var screen = new Vector2(Screen.width, Screen.height);
             var center = screen * 0.5f;
 
