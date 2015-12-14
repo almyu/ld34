@@ -15,8 +15,9 @@ namespace LD34 {
         private bool charge;
         private Vector2 velocity;
 
-        public void ActivatePulse(float timing) {
+        public void ActivatePulse(float timing, Hero.Hand hand) {
             speed = speedAfterHit;
+            Hero.instance.AimAt(transform.position, hand);
         }
 
         public void FinishPulse(float timing) {

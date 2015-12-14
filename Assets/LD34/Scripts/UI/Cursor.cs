@@ -20,7 +20,7 @@ namespace LD34.UI {
             desiredColor = normalColor;
         }
 
-        public void ActivatePulse(float timing) {
+        public void ActivatePulse(float timing, Hero.Hand hand) {
             color = hitColor;
             desiredColor = activeColor;
         }

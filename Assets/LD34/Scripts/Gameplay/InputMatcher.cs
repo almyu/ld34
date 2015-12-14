@@ -6,7 +6,7 @@ namespace LD34 {
 
     public interface IPulseListener {
         void MissPulse();
-        void ActivatePulse(float timing);
+        void ActivatePulse(float timing, Hero.Hand hand);
         void FinishPulse(float timing);
         void FailPulse();
         void UpdatePulseProximity(float dt);
@@ -39,7 +39,11 @@ namespace LD34 {
         private Queue<Pulse> queue = new Queue<Pulse>();
         private List<IPulseListener> listeners = new List<IPulseListener>();
 
+        private Hero.Hand hand;
+
         private void Awake() {
+            hand = inputButton == "Left" ? Hero.Hand.Left : Hero.Hand.Right;
+
             foreach (var lob in listenerObjects) {
                 var listener = lob.GetComponent<IPulseListener>();
                 if (listener != null) listeners.Add(listener);
@@ -84,10 +88,10 @@ namespace LD34 {
             pulse.actionTime += pulse.length;
 
             foreach (var listener in listeners)
-                listener.ActivatePulse(timing);
+                listener.ActivatePulse(timing, hand);
 
             foreach (var listener in pulse.listeners)
-                listener.ActivatePulse(timing);
+                listener.ActivatePulse(timing, hand);
 
             if (pulse.length < longPulse) {
                 foreach (var listener in listeners)

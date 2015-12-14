@@ -8,7 +8,7 @@ namespace LD34.UI {
         public Color activeColor;
         public Blinker finishBlinker, failBlinker;
 
-        public void ActivatePulse(float timing) {
+        public void ActivatePulse(float timing, Hero.Hand hand) {
             GetComponent<CanvasRenderer>().SetColor(activeColor);
         }
 
