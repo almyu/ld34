@@ -6,11 +6,12 @@ namespace LD34 {
     public class Recorder : MonoBehaviour {
 
         public AudioSource source;
-        public float chunkLength = 2f;
-        public int chunkIndex = 0;
-        public float snap = 0.25f;
+        public float sampleLength = 0.25f;
+        public int samplesPerChunk = 16;
+        public int repeatStart, repeatEnd = 16;
         public float pixelsPerSecond = 100f;
         public KeyCode nextHotkey, prevHotkey, resetHotkey;
+        public KeyCode toggleRepeatHotkey = KeyCode.Return;
         public KeyCode pauseHotkey = KeyCode.Space;
         public KeyCode seekForwardHotkey = KeyCode.Equals, seekBackHotkey = KeyCode.Minus;
 
@@ -19,106 +20,98 @@ namespace LD34 {
             public string hotkey;
             public Color color;
             public string description;
+            public bool merge;
         }
 
         public Event[] events = new[] {
             new Event { hotkey = "Left", color = Color.red, description = "Left" },
-            new Event { hotkey = "Right", color = Color.blue, description = "Right" }
+            new Event { hotkey = "Right", color = Color.blue, description = "Right" },
+            new Event { hotkey = "AltLeft", color = Color.red, description = "Hold Left", merge = true },
+            new Event { hotkey = "AltRight", color = Color.blue, description = "Hold Right", merge = true }
         };
 
-        public struct Beat {
-            public int eventIndex;
-            public float time;
-        }
-
-        public class Chunk {
-            public float start, end;
-            public List<Beat> beats = new List<Beat>();
-
-            public void Reset() {
-                beats.Clear();
-            }
-
-            public void AddBeat(float time, int eventIndex) {
-                beats.Add(new Beat { time = time, eventIndex = eventIndex });
-            }
-        }
-
         private AudioClip track;
-        private Chunk[] chunks;
+        private int[] beats;
 
-        private Texture2D activeChunkTex, inactiveChunkTex;
+        private float headerHeight = 20f;
+        private float eventHeight = 50;
+        private float trackHeight;
 
         private void Awake() {
             track = source.clip;
-            chunks = new Chunk[Mathf.FloorToInt(track.length / chunkLength)];
+            beats = new int[Mathf.FloorToInt(track.length / sampleLength)];
 
-            for (int i = 0; i < chunks.Length; ++i) {
-                chunks[i] = new Chunk {
-                    start = i * chunkLength,
-                    end = i * chunkLength + chunkLength
-                };
-            }
+            trackHeight = eventHeight * events.Length;
+        }
 
-            activeChunkTex = new Texture2D(1, 1);
-            activeChunkTex.SetPixel(0, 0, Color.white.WithA(0.2f));
-            activeChunkTex.Apply(true, true);
+        private void ClearBeats(int at, int count) {
+            for (int i = 0; i < count; ++i)
+                beats[at + i] = 0;
+        }
 
-            inactiveChunkTex = new Texture2D(1, 1);
-            inactiveChunkTex.SetPixel(0, 0, Color.grey.WithA(0.2f));
-            inactiveChunkTex.Apply(true, true);
+        private int now {
+            get { return Mathf.RoundToInt(source.time / sampleLength); } // HACK
+            set { source.time = value * sampleLength; }
+        }
+
+        private int nowCompensated {
+            get { return Mathf.RoundToInt((source.time + Time.deltaTime * 0.5f) / sampleLength); }
+        }
+
+        private bool GetEventFlag(int at, int eventIndex) {
+            return (beats[at] & (1 << eventIndex)) != 0;
+        }
+
+        private void SetEventFlag(int at, int eventIndex, bool set) {
+            if (set) beats[at] |= (1 << eventIndex);
+            else beats[at] &= ~(1 << eventIndex);
+        }
+
+        private void ToggleEventFlag(int at, int eventIndex) {
+            SetEventFlag(at, eventIndex, !GetEventFlag(at, eventIndex));
         }
 
         private void Update() {
-            var ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-
             if (Input.GetKeyDown(pauseHotkey)) {
                 if (source.isPlaying) {
                     source.Pause();
-                    Seek(0);
+                    now = now;
                 }
                 else source.UnPause();
             }
 
-            if (Input.GetKeyDown(seekForwardHotkey)) Seek(1);
-            if (Input.GetKeyDown(seekBackHotkey)) Seek(-1);
+            if (Input.GetKeyDown(seekForwardHotkey)) ++now;
+            if (Input.GetKeyDown(seekBackHotkey)) --now;
 
-            if (Input.GetKeyDown(nextHotkey)) Advance(1, ctrl);
-            if (Input.GetKeyDown(prevHotkey)) Advance(-1);
-            if (Input.GetKeyDown(resetHotkey)) chunks[chunkIndex].Reset();
-
-            if (!source.isPlaying)
-                chunkIndex = Mathf.FloorToInt(source.time / chunkLength);
-
-            else if (source.time + Time.deltaTime >= chunks[chunkIndex].end)
-                source.time = chunks[chunkIndex].start;
-
-            for (int i = 0; i < events.Length; ++i) {
-                if (!Input.GetButtonDown(events[i].hotkey)) continue;
-
-                var chunk = chunks[chunkIndex];
-                var time = SnapInput(source.time - chunk.start);
-                chunks[chunkIndex].AddBeat(time, i);
+            if (Input.GetKeyDown(nextHotkey)) {
+                now += samplesPerChunk;
+                repeatStart += samplesPerChunk;
+                repeatEnd += samplesPerChunk;
             }
-        }
+            if (Input.GetKeyDown(prevHotkey)) {
+                now -= samplesPerChunk;
+                repeatStart += samplesPerChunk;
+                repeatEnd += samplesPerChunk;
+            }
+            if (Input.GetKeyDown(resetHotkey))
+                ClearBeats(now / samplesPerChunk, samplesPerChunk);
 
-        private float Snap(float time) {
-            return Mathf.Round(time / snap) * snap;
-        }
+            if (Input.GetKeyDown(toggleRepeatHotkey)) {
+                if (repeatStart < repeatEnd)
+                    repeatEnd = repeatStart;
+                else {
+                    repeatStart = nowCompensated / samplesPerChunk;
+                    repeatEnd = repeatStart + samplesPerChunk;
+                }
+            }
 
-        private float SnapInput(float time) {
-            return Snap(time - Time.deltaTime * 0.5f);
-        }
+            if (repeatStart < repeatEnd && source.time + Time.deltaTime >= repeatEnd * sampleLength) {
+                now = repeatStart;
+            }
 
-        public void Seek(int numSnaps) {
-            source.time = Mathf.Max(0f, Snap(source.time + numSnaps * snap));
-        }
-
-        public void Advance(int numChunks, bool instantly = false) {
-            chunkIndex = Mathf.Clamp(chunkIndex + numChunks, 0, chunks.Length - 1);
-
-            if (instantly || !source.isPlaying)
-                source.time = chunks[chunkIndex].start;
+            for (int i = 0; i < events.Length; ++i)
+                if (Input.GetButtonDown(events[i].hotkey))
+                    ToggleEventFlag(nowCompensated, i);
         }
 
         private void DrawVerticalLine(Vector2 pos, float height, float width = 1) {
@@ -129,56 +122,63 @@ namespace LD34 {
             var screen = new Vector2(Screen.width, Screen.height);
             var center = screen * 0.5f;
 
-            var trackHeight = 100f;
-            var headerHeight = 20f;
-            var snapHeight = 10f;
-            var eventHeight = trackHeight / events.Length;
-
             GUI.color = Color.white;
             DrawVerticalLine(new Vector2(center.x, 0), screen.y);
 
             var time = source.time;
-            var index = 0;
 
-            foreach (var chunk in chunks) {
-                var chunkStart = chunk.start - time;
-                var chunkEnd = chunk.end - time;
+            GUI.color = Color.white.WithA(0.2f);
+            GUI.DrawTexture(new Rect(0, center.y - headerHeight, screen.x, headerHeight), Texture2D.whiteTexture);
 
-                var chunkStartX = chunkStart * pixelsPerSecond;
-                var chunkEndX = chunkEnd * pixelsPerSecond;
+            for (int eventIndex = 0; eventIndex < events.Length; ++eventIndex) {
+                GUI.color = events[eventIndex].color.WithA(0.1f);
+                GUI.DrawTexture(new Rect(0, center.y + eventIndex * eventHeight, screen.x, eventHeight), Texture2D.whiteTexture);
+            }
 
-                var chunkLabelRect = Rect.MinMaxRect(
-                    center.x + chunkStartX, center.y - headerHeight,
-                    center.x + chunkEndX, center.y);
+            for (int i = 0; i < beats.Length; ++i) {
+                var barTime = i * sampleLength;
+                var barX = (barTime - time) * pixelsPerSecond;
 
-                var startMinute = Mathf.FloorToInt(chunk.start / 60f);
-                var startSecond = Mathf.FloorToInt(Mathf.Repeat(chunk.start, 60f));
+                if (i % samplesPerChunk == 0) {
+                    var chunkLabelRect = new Rect(
+                        center + new Vector2(barX, -headerHeight),
+                        new Vector2(samplesPerChunk * sampleLength * pixelsPerSecond, headerHeight));
 
-                GUI.color = Color.white;
-                GUI.DrawTexture(chunkLabelRect, index == chunkIndex ? activeChunkTex : inactiveChunkTex);
-                GUI.Label(chunkLabelRect, string.Format(" {0}:{1:d2}", startMinute, startSecond));
+                    var startMinute = Mathf.FloorToInt((i * sampleLength) / 60f);
+                    var startSecond = Mathf.FloorToInt(Mathf.Repeat(i * sampleLength, 60f));
 
-                DrawVerticalLine(center + new Vector2(chunkStartX, -headerHeight), trackHeight + headerHeight);
-                DrawVerticalLine(center + new Vector2(chunkEndX, -headerHeight), trackHeight + headerHeight);
+                    if (repeatStart <= i && i < repeatEnd) {
+                        GUI.color = Color.white.WithA(0.2f);
+                        GUI.DrawTexture(chunkLabelRect, Texture2D.whiteTexture);
+                    }
+
+                    GUI.color = Color.white;
+                    GUI.Label(chunkLabelRect, string.Format(" {0}:{1:d2}", startMinute, startSecond));
+
+                    DrawVerticalLine(chunkLabelRect.min, trackHeight + headerHeight);
+                }
+
+                var barH = i % 4 == 0 ? headerHeight : headerHeight * 0.5f;
 
                 GUI.color = Color.white.WithA(0.5f);
-                for (int i = 0, n = Mathf.FloorToInt(chunkLength / snap); i < n; ++i) {
-                    var barTime = chunkStart + i * snap;
-                    var barX = barTime * pixelsPerSecond;
-                    var barH = i % 4 == 0 ? snapHeight * 2f : snapHeight;
+                DrawVerticalLine(center + new Vector2(barX, -headerHeight), barH);
 
-                    DrawVerticalLine(center + new Vector2(barX, -headerHeight), barH);
+                for (int eventIndex = 0; eventIndex < events.Length; ++eventIndex) {
+                    if (!GetEventFlag(i, eventIndex)) continue;
+
+                    var eventY = eventIndex * eventHeight;
+                    GUI.color = events[eventIndex].color;
+
+                    if (events[eventIndex].merge && i > 0 && GetEventFlag(i - 1, eventIndex)) {
+                        var eventWidth = sampleLength * pixelsPerSecond;
+
+                        GUI.DrawTexture(new Rect(
+                                center.x + barX - eventWidth, center.y + eventY,
+                                eventWidth, eventHeight),
+                            Texture2D.whiteTexture);
+                    }
+                    else DrawVerticalLine(center + new Vector2(barX, eventY), eventHeight, 2);
                 }
-
-                foreach (var beat in chunk.beats) {
-                    var beatTime = chunkStart + beat.time;
-                    var beatX = beatTime * pixelsPerSecond;
-                    var eventY = beat.eventIndex * eventHeight;
-
-                    GUI.color = events[beat.eventIndex].color;
-                    DrawVerticalLine(center + new Vector2(beatX, eventY), eventHeight, 2);
-                }
-                ++index;
             }
         }
     }

@@ -134,7 +134,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -197,7 +197,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fa7976af45c355b459986de213de4f6f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e877b672225614d44ab734f0ad7a7d4c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -270,13 +270,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 665298953}
-  chunkLength: 4
-  chunkIndex: 0
-  snap: .25
+  sampleLength: .1875
+  samplesPerChunk: 16
+  repeatStart: 0
+  repeatEnd: 16
   pixelsPerSecond: 100
   nextHotkey: 93
   prevHotkey: 91
   resetHotkey: 8
+  toggleRepeatHotkey: 13
   pauseHotkey: 32
   seekForwardHotkey: 61
   seekBackHotkey: 45
@@ -284,9 +286,19 @@ MonoBehaviour:
   - hotkey: Left
     color: {r: 1, g: 0, b: 0, a: 1}
     description: Left
+    merge: 0
   - hotkey: Right
     color: {r: 0, g: 0, b: 1, a: 1}
     description: Right
+    merge: 0
+  - hotkey: AltLeft
+    color: {r: 1, g: 0, b: 0, a: 1}
+    description: Hold Left
+    merge: 1
+  - hotkey: AltRight
+    color: {r: 0, g: 0, b: 1, a: 1}
+    description: Hold Right
+    merge: 1
 --- !u!4 &665298955
 Transform:
   m_ObjectHideFlags: 0
