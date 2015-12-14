@@ -9,10 +9,11 @@ namespace LD34 {
 
     public class TimelinePlayer : MonoBehaviour {
 
+        public static float lag = 0.05f;
+
         public int shortBeatEventIndex;
         public int longBeatEventIndex;
         public float lookahead = 6f;
-        public float shift = 0.05f;
 
         private int shortFlag, longFlag;
         private List<Timeline.Pulse> pulses = new List<Timeline.Pulse>();
@@ -69,7 +70,7 @@ namespace LD34 {
 
             if (pulse.position <= time) {
                 var latency = time - pulse.position;
-                onPulse.Invoke(Time.timeSinceLevelLoad + lookahead - latency - shift, pulse.length);
+                onPulse.Invoke(Time.timeSinceLevelLoad + lookahead - latency - lag, pulse.length);
                 ++pulseIndex;
             }
         }

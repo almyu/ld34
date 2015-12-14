@@ -46,7 +46,7 @@ namespace LD34 {
             emitter.Spawn(transform.position, 0).text = text;
         }
 
-        public void ActivatePulse(float timing) {
+        public void ActivatePulse(float timing, Hero.Hand hand) {
             EmitHit(timing);
             lastActivationTime = Time.timeSinceLevelLoad;
         }
