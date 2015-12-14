@@ -9,19 +9,20 @@ namespace LD34 {
         public float chunkLength = 2f;
         public int chunkIndex = 0;
         public float snap = 0.25f;
+        public bool snapAntiLag = true;
         public float pixelsPerSecond = 100f;
         public KeyCode nextHotkey, prevHotkey, resetHotkey;
 
         [System.Serializable]
         public struct Event {
-            public KeyCode hotkey;
+            public string hotkey;
             public Color color;
             public string description;
         }
 
         public Event[] events = new[] {
-            new Event { hotkey = KeyCode.LeftArrow, color = Color.red, description = "Left" },
-            new Event { hotkey = KeyCode.RightArrow, color = Color.blue, description = "Right" }
+            new Event { hotkey = "Left", color = Color.red, description = "Left" },
+            new Event { hotkey = "Right", color = Color.blue, description = "Right" }
         };
 
         public struct Beat {
@@ -76,7 +77,7 @@ namespace LD34 {
                 source.time = chunks[chunkIndex].start;
 
             for (int i = 0; i < events.Length; ++i) {
-                if (!Input.GetKeyDown(events[i].hotkey)) continue;
+                if (!Input.GetButtonDown(events[i].hotkey)) continue;
 
                 var chunk = chunks[chunkIndex];
                 var time = Snap(source.time - chunk.start);
@@ -85,6 +86,7 @@ namespace LD34 {
         }
 
         private float Snap(float time) {
+            if (snapAntiLag) time -= Time.deltaTime * 0.5f;
             return Mathf.Round(time / snap) * snap;
         }
 
@@ -100,7 +102,10 @@ namespace LD34 {
             var screen = new Vector2(Screen.width, Screen.height);
             var center = screen * 0.5f;
 
-            var trackHeight = 50f;
+            var trackHeight = 100f;
+            var headerHeight = 20f;
+            var snapHeight = 15f;
+            var eventHeight = trackHeight / events.Length;
 
             GUI.color = Color.white;
             DrawVerticalLine(new Vector2(center.x, 0), screen.y);
@@ -116,22 +121,34 @@ namespace LD34 {
                 var chunkEndX = chunkEnd * pixelsPerSecond;
 
                 var chunkLabelRect = Rect.MinMaxRect(
-                    center.x + chunkStartX, center.y,
-                    center.x + chunkEndX, center.y + trackHeight * 0.5f);
+                    center.x + chunkStartX, center.y - headerHeight,
+                    center.x + chunkEndX, center.y);
 
-                GUI.DrawTexture(chunkLabelRect, index == chunkIndex ? activeChunkTex : inactiveChunkTex);
-                GUI.Label(chunkLabelRect, " " + index);
+                var startMinute = Mathf.FloorToInt(chunk.start / 60f);
+                var startSecond = Mathf.FloorToInt(Mathf.Repeat(chunk.start, 60f));
 
                 GUI.color = Color.white;
-                DrawVerticalLine(center + Vector2.right * chunkStartX, trackHeight * 1.5f);
-                DrawVerticalLine(center + Vector2.right * chunkEndX, trackHeight * 1.5f);
+                GUI.DrawTexture(chunkLabelRect, index == chunkIndex ? activeChunkTex : inactiveChunkTex);
+                GUI.Label(chunkLabelRect, string.Format(" {0}:{1:d2}", startMinute, startSecond));
+
+                DrawVerticalLine(center + new Vector2(chunkStartX, -headerHeight), trackHeight + headerHeight);
+                DrawVerticalLine(center + new Vector2(chunkEndX, -headerHeight), trackHeight + headerHeight);
+
+                GUI.color = Color.white.WithA(0.5f);
+                for (int i = 0, n = Mathf.FloorToInt(chunkLength / snap); i < n; ++i) {
+                    var barTime = chunkStart + i * snap;
+                    var barX = barTime * pixelsPerSecond;
+
+                    DrawVerticalLine(center + new Vector2(barX, -headerHeight), snapHeight);
+                }
 
                 foreach (var beat in chunk.beats) {
                     var beatTime = chunkStart + beat.time;
                     var beatX = beatTime * pixelsPerSecond;
+                    var eventY = beat.eventIndex * eventHeight;
 
                     GUI.color = events[beat.eventIndex].color;
-                    DrawVerticalLine(center + Vector2.right * beatX, trackHeight);
+                    DrawVerticalLine(center + new Vector2(beatX, eventY), eventHeight, 2);
                 }
                 ++index;
             }

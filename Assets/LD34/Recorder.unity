@@ -273,15 +273,16 @@ MonoBehaviour:
   chunkLength: 4
   chunkIndex: 0
   snap: .25
+  snapAntiLag: 1
   pixelsPerSecond: 100
   nextHotkey: 93
   prevHotkey: 91
   resetHotkey: 8
   events:
-  - hotkey: 276
+  - hotkey: Left
     color: {r: 1, g: 0, b: 0, a: 1}
     description: Left
-  - hotkey: 275
+  - hotkey: Right
     color: {r: 0, g: 0, b: 1, a: 1}
     description: Right
 --- !u!4 &665298955
