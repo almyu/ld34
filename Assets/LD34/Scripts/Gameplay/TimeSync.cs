@@ -9,6 +9,15 @@ namespace LD34 {
             get { return byTrack ? source.time : Time.timeSinceLevelLoad; }
         }
 
+        public static float CeilTimerToBeat(float minTimeLeft) {
+            return CeilToBeat(time + minTimeLeft) - time;
+        }
+
+        public static float CeilToBeat(float time) {
+            var beatInterval = 60f / Menu.beats.bpm;
+            return Mathf.Ceil(time / beatInterval) * beatInterval;
+        }
+
         public static bool byTrack;
         public static AudioSource source;
 

@@ -59,6 +59,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 485490}
   - 111: {fileID: 11124074}
+  - 114: {fileID: 11485298}
   m_Layer: 0
   m_Name: AoeShot1
   m_TagString: Untagged
@@ -252,6 +253,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &11485298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abf047b6fb0b064693e353da5834c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLeft: .5
+  target: {fileID: 0}
 --- !u!198 &19805602
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -6682,7 +6696,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: timeLeft
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153754}

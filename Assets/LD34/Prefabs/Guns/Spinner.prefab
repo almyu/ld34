@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 489990}
+  - 114: {fileID: 11432810}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -129,6 +130,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &11432810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eac90d5978e39f459a586773da2457a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tip: {fileID: 473874}
+  projectilePrefab: {fileID: 11485298, guid: 8db18b72f74e87b46b2dcd34615503de, type: 2}
+  shotInterval: .25
 --- !u!212 &21202934
 SpriteRenderer:
   m_ObjectHideFlags: 1

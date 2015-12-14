@@ -56,6 +56,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412710}
+  - 114: {fileID: 11447570}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -129,6 +130,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &11447570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eac90d5978e39f459a586773da2457a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tip: {fileID: 488478}
+  projectilePrefab: {fileID: 11434882, guid: 7490964dc126acc45b41697e5c861a77, type: 2}
+  shotInterval: .25
 --- !u!212 &21241026
 SpriteRenderer:
   m_ObjectHideFlags: 1

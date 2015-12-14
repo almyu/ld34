@@ -144,7 +144,6 @@ MonoBehaviour:
   tip: {fileID: 438758}
   beamPrefab: {fileID: 11444688, guid: 16d25ee24fa9159458bdba2462d51e14, type: 2}
   impactPrefab: {fileID: 103054, guid: b9da8d8f0c9bbee4dbca5e37557a9d39, type: 2}
-  impactLifetime: 2
 --- !u!212 &21205528
 SpriteRenderer:
   m_ObjectHideFlags: 1

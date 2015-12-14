@@ -6,6 +6,7 @@ namespace LD34 {
 
         public Enemy[] regularPrefabs, bossPrefabs;
         public float bossMinLength = 1f;
+        public float spawnX = 5f;
         public float spawnExtent = 5f;
 
         public void SpawnEnemy(Pulse pulse) {
@@ -13,7 +14,7 @@ namespace LD34 {
             var enemy = Instantiate(prefab);
 
             var dist = (pulse.actionTime - Time.timeSinceLevelLoad + InputMatcher.halfMaxError) * enemy.speed;
-            enemy.transform.position = new Vector2(dist, RollSpawnHeight());
+            enemy.transform.position = new Vector2(dist + spawnX, RollSpawnHeight());
 
             pulse.listeners.Add(enemy);
         }

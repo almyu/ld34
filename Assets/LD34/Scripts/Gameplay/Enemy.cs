@@ -10,22 +10,27 @@ namespace LD34 {
 
         public float speed = 3f;
         public float speedAfterHit = 1f;
-        public float deathDelay = 1f;
+        public float afterlife = 5f;
 
         private bool charge;
         private Vector2 velocity;
 
+        private Hero.Hand hand;
+        private bool wasActivated, nextHitIsLethal;
+
         public void ActivatePulse(float timing, Hero.Hand hand) {
-            speed = speedAfterHit;
-            Hero.instance.AimAt(transform.position, hand);
+            this.hand = hand;
+            wasActivated = true;
+            Hero.instance.OpenFire(transform, hand);
         }
 
         public void FinishPulse(float timing) {
-            onHit.Invoke();
-            StartCoroutine(DoScheduleDeath());
+            Hero.instance.CeaseFire(hand);
+            nextHitIsLethal = true;
         }
 
         public void FailPulse() {
+            if (wasActivated) Hero.instance.CeaseFire(hand);
             charge = true;
         }
 
@@ -33,9 +38,18 @@ namespace LD34 {
 
         public void UpdatePulseProximity(float dt) {}
 
-        private IEnumerator DoScheduleDeath() {
-            yield return new WaitForSeconds(deathDelay);
+        public void ProjectileHit() {
+            if (nextHitIsLethal) {
+                BlowUp();
+                return;
+            }
+            speed = speedAfterHit;
+            onHit.Invoke();
+        }
+
+        public void BlowUp() {
             onDeath.Invoke();
+            Destroy(gameObject, afterlife);
         }
 
         private void Update() {

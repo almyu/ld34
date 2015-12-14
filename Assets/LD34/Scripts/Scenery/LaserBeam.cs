@@ -5,18 +5,23 @@ namespace LD34 {
     public class LaserBeam : MonoBehaviour {
 
         public SpriteRenderer muzzle, beam;
-        public float lifetime = 5f;
+        public float fadeTime = 0.5f;
 
-        private float life;
+        private float fade;
+        private bool fading;
 
         private void Awake() {
-            Destroy(gameObject, lifetime);
-            life = lifetime;
+            enabled = false;
+        }
+
+        public void FadeOut() {
+            enabled = true;
+            fade = fadeTime;
         }
 
         private void Update() {
-            var alpha = life / lifetime;
-            life -= Time.deltaTime;
+            var alpha = fade / fadeTime;
+            fade -= Time.deltaTime;
 
             muzzle.color = muzzle.color.WithA(alpha);
             beam.color = beam.color.WithA(alpha);

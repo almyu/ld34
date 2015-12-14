@@ -336,9 +336,9 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  speed: 6
+  speed: 4
   speedAfterHit: 1
-  deathDelay: 1
+  afterlife: 5
 --- !u!198 &19806328
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -6834,7 +6834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -7,23 +7,43 @@ namespace LD34 {
         public Transform tip;
         public LaserBeam beamPrefab;
         public GameObject impactPrefab;
-        public float impactLifetime = 2f;
 
-        public void Fire(Vector3 point) {
-            var dir = (point - tip.position).WithZ(0);
+        private Enemy target;
+        private LaserBeam beam;
+        private GameObject impact;
+
+        public void OpenFire(Transform enemy) {
+            target = enemy.GetComponent<Enemy>();
+            if (!target) return;
+
+            target.ProjectileHit();
+            target.speed = 0f;
+
+            beam = (LaserBeam) Instantiate(beamPrefab, tip.position, tip.rotation);
+            impact = (GameObject) Instantiate(impactPrefab, enemy.position, Quaternion.identity);
+            Update();
+            enabled = true;
+        }
+
+        public void CeaseFire() {
+            if (!enabled) return;
+
+            if (target) {
+                target.BlowUp();
+                target = null;
+            }
+            beam.FadeOut();
+            Destroy(impact);
+            enabled = false;
+        }
+
+        private void Update() {
+            if (!target) return;
+
+            var dir = (target.transform.position - tip.position).WithZ(0);
             transform.right = dir.normalized;
-            SpawnBeam(dir.magnitude);
-            SpawnImpact(point);
-        }
-
-        public void SpawnBeam(float length) {
-            var beam = (LaserBeam) Instantiate(beamPrefab, tip.position, tip.rotation);
-            beam.SetLength(length);
-        }
-
-        public void SpawnImpact(Vector3 point) {
-            var impact = (GameObject) Instantiate(impactPrefab, point, Quaternion.identity);
-            Destroy(impact, impactLifetime);
+            beam.SetLength(dir.magnitude);
+            impact.transform.position = target.transform.position;
         }
     }
 }

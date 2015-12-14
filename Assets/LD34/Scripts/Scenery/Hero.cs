@@ -19,12 +19,16 @@ namespace LD34 {
             return hand == Hand.Left ? leftHand : rightHand;
         }
         
-        public void AimAt(Vector3 point, Hand hand) {
+        public void OpenFire(Transform target, Hand hand) {
             var arm = GetArm(hand);
-            var dir = (point.WithZ(0) - arm.position.WithZ(0)).normalized;
+            var dir = (target.position - arm.position).WithZ(0).normalized;
 
             GetArm(hand).right = dir;
-            GetHand(hand).BroadcastMessage("Fire", point, SendMessageOptions.DontRequireReceiver);
+            GetHand(hand).BroadcastMessage("OpenFire", target, SendMessageOptions.DontRequireReceiver);
+        }
+
+        public void CeaseFire(Hand hand) {
+            GetHand(hand).BroadcastMessage("CeaseFire", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
