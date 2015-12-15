@@ -2,7 +2,7 @@
 using JamSuite.UI;
 using System;
 
-namespace LD34 {
+namespace LD34.UI {
 
     public class Words : MonoBehaviour, IPulseListener {
 
@@ -11,6 +11,7 @@ namespace LD34 {
             public FloatingText emitter;
             public string text;
             public float timing;
+            public string scoreField;
         }
 
         public Preset[] hitPresets;
@@ -22,6 +23,7 @@ namespace LD34 {
         public string missText = "Miss";
 
         public float minLength = 0.1f;
+        public Score score;
 
         private float lastActivationTime;
 
@@ -39,6 +41,8 @@ namespace LD34 {
 
         public void EmitHit(float timing) {
             var preset = PickHitPreset(timing);
+            ++score.combo;
+            score.Add(preset.scoreField);
             Emit(preset.emitter, preset.text);
         }
 
@@ -52,6 +56,8 @@ namespace LD34 {
         }
 
         public void FailPulse() {
+            ++score.fails;
+            score.combo = 0;
             Emit(failEmitter, failText);
         }
 
@@ -61,6 +67,8 @@ namespace LD34 {
         }
 
         public void MissPulse() {
+            ++score.fails;
+            score.combo = 0;
             Emit(missEmitter, missText);
         }
 

@@ -363,7 +363,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 39754140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 98082213}
+        m_MethodName: GoToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &44167351
@@ -469,17 +480,21 @@ MonoBehaviour:
   - emitter: {fileID: 354827145}
     text: Perfect!
     timing: .0500000007
+    scoreField: perfects
   - emitter: {fileID: 2071372792}
     text: Great
     timing: .075000003
+    scoreField: greats
   - emitter: {fileID: 183705701}
     text: Good
     timing: .100000001
+    scoreField: goods
   failEmitter: {fileID: 751962097}
   failText: Fail
   missEmitter: {fileID: 751962097}
   missText: Miss
   minLength: .150000006
+  score: {fileID: 347296044}
 --- !u!4 &48214332
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +687,7 @@ GameObject:
   - 224: {fileID: 98082210}
   - 222: {fileID: 98082212}
   - 114: {fileID: 98082211}
+  - 114: {fileID: 98082213}
   m_Layer: 5
   m_Name: Statistics
   m_TagString: Untagged
@@ -731,6 +747,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 98082209}
+--- !u!114 &98082213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 98082209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67db24a6ca75cd408684b8221682c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 347296044}
+  goodsText: {fileID: 1532578485}
+  greatsText: {fileID: 984117710}
+  perfectsText: {fileID: 271761853}
+  accuracyText: {fileID: 942324133}
+  maxComboText: {fileID: 1574991791}
+  scoreText: {fileID: 1334589151}
+  stuffToDisable:
+  - {fileID: 1297836308}
+  - {fileID: 912024966}
 --- !u!1 &183705699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1636,50 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
+--- !u!1 &347296043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 347296045}
+  - 114: {fileID: 347296044}
+  m_Layer: 0
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &347296044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347296043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c13f74ac64c41144bc98045dc664598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboText: {fileID: 636430522}
+  scoreText: {fileID: 44167353}
+  maxCombo: 0
+  statistics: {fileID: 98082209}
+--- !u!4 &347296045
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347296043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &354827143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2667,7 @@ MonoBehaviour:
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 8
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -2639,7 +2719,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1 &665370909
 GameObject:
   m_ObjectHideFlags: 0
@@ -4790,7 +4870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
 --- !u!114 &1279108728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5098,7 +5178,7 @@ Transform:
   - {fileID: 1917213858}
   - {fileID: 1272312100}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!1 &1400267757
 GameObject:
   m_ObjectHideFlags: 0
