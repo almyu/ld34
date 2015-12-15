@@ -1825,8 +1825,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   tintSpeed: .5
   tintOffset: 0
-  minAlpha: .5
-  maxAlpha: 1
+  minAlpha: .300000012
+  maxAlpha: .600000024
 --- !u!1 &428735264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,8 +3038,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   tintSpeed: .5
   tintOffset: 0
-  minAlpha: .5
-  maxAlpha: 1
+  minAlpha: .300000012
+  maxAlpha: .600000024
 --- !u!1 &751962096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,6 +3370,7 @@ GameObject:
   - 92: {fileID: 767545465}
   - 124: {fileID: 767545464}
   - 81: {fileID: 767545463}
+  - 111: {fileID: 767545468}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3444,6 +3445,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!111 &767545468
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 767545462}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b1219a8d89278fd49bf890f4a5bce334, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b1219a8d89278fd49bf890f4a5bce334, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &847998373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,6 +4265,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1272312100}
   - 212: {fileID: 1272312101}
+  - 114: {fileID: 1272312102}
   m_Layer: 0
   m_Name: SkyShadow
   m_TagString: Untagged
@@ -4296,6 +4313,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a657b239c9dae14d986a8f33183a650, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: .677999973}
+--- !u!114 &1272312102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1272312099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190080
+    key1:
+      serializedVersion: 2
+      rgba: 4278190080
+    key2:
+      serializedVersion: 2
+      rgba: 0
+    key3:
+      serializedVersion: 2
+      rgba: 0
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  tintSpeed: .125
+  tintOffset: 0
+  minAlpha: .100000001
+  maxAlpha: .600000024
 --- !u!1 &1279108725
 GameObject:
   m_ObjectHideFlags: 0
@@ -6129,7 +6204,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917213857}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -1.62920685e-07}
-  m_LocalPosition: {x: 0, y: -4.86000013, z: -1}
+  m_LocalPosition: {x: 0, y: -5.51000023, z: -1}
   m_LocalScale: {x: 400, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1371179158}
@@ -6218,8 +6293,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   tintSpeed: .5
   tintOffset: 0
-  minAlpha: .5
-  maxAlpha: 1
+  minAlpha: .200000003
+  maxAlpha: .600000024
 --- !u!1 &1975129651
 GameObject:
   m_ObjectHideFlags: 0
