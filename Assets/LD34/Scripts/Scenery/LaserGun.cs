@@ -7,6 +7,7 @@ namespace LD34 {
         public Transform tip;
         public LaserBeam beamPrefab;
         public GameObject impactPrefab;
+        public bool piercing = true;
 
         private Enemy target;
         private LaserBeam beam;
@@ -42,7 +43,10 @@ namespace LD34 {
 
             var dir = (target.transform.position - tip.position).WithZ(0);
             transform.right = dir.normalized;
-            beam.SetLength(dir.magnitude);
+
+            if (piercing) beam.SetLength(100f);
+            else beam.SetLength(dir.magnitude);
+
             impact.transform.position = target.transform.position;
         }
     }
