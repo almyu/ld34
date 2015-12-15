@@ -29,7 +29,7 @@ namespace LD34 {
             if (!enabled) return;
 
             if (target) {
-                target.BlowUp();
+                target.ProjectileHit();
                 target = null;
             }
             beam.FadeOut();

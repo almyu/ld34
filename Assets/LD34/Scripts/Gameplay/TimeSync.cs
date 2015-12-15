@@ -18,6 +18,11 @@ namespace LD34 {
             return Mathf.Ceil(time / beatInterval) * beatInterval;
         }
 
+        public static float FloorToBeat(float time) {
+            var beatInterval = 60f / Menu.beats.bpm;
+            return Mathf.Floor(time / beatInterval) * beatInterval;
+        }
+
         public static bool byTrack;
         public static AudioSource source;
 

@@ -150,6 +150,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 24048243}
   - 212: {fileID: 24048244}
+  - 114: {fileID: 24048245}
   m_Layer: 0
   m_Name: Tile3Glow
   m_TagString: Untagged
@@ -179,7 +180,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -197,6 +198,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b06f8024d9fc82547a419a1bf175f46f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &24048245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 24048242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &48214330
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +867,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 210616052}
   - 212: {fileID: 210616053}
+  - 114: {fileID: 210616054}
   m_Layer: 0
   m_Name: Tile1Glow
   m_TagString: Untagged
@@ -837,7 +897,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -855,6 +915,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5ed42d70c6a61224e8235ba8447e6398, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &210616054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210616051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &214785852
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +1054,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 225213304}
   - 212: {fileID: 225213305}
+  - 114: {fileID: 225213306}
   m_Layer: 0
   m_Name: Tile5Glow
   m_TagString: Untagged
@@ -965,7 +1084,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -983,6 +1102,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9628f9c02fafa0140966b93ac24cad85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &225213306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225213303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &265157534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,6 +1721,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400934761}
   - 212: {fileID: 400934762}
+  - 114: {fileID: 400934763}
   m_Layer: 0
   m_Name: GlowMiddle
   m_TagString: Untagged
@@ -1573,7 +1751,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1591,6 +1769,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a657b239c9dae14d986a8f33183a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .497000009}
+--- !u!114 &400934763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400934760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: 0
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &428735264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,6 +2512,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 665514141}
   - 212: {fileID: 665514142}
+  - 114: {fileID: 665514143}
   m_Layer: 0
   m_Name: Tile4Glow
   m_TagString: Untagged
@@ -2305,7 +2542,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2323,6 +2560,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9b533e943e2d7c741a7f65252d48ca00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &665514143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 665514140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &703256199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,6 +2627,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 703256200}
   - 212: {fileID: 703256201}
+  - 114: {fileID: 703256202}
   m_Layer: 0
   m_Name: Tile4Glow
   m_TagString: Untagged
@@ -2361,7 +2657,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2379,6 +2675,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9b533e943e2d7c741a7f65252d48ca00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &703256202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 703256199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &706396265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2580,6 +2934,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 724112490}
   - 212: {fileID: 724112491}
+  - 114: {fileID: 724112492}
   m_Layer: 0
   m_Name: GlowBack
   m_TagString: Untagged
@@ -2609,7 +2964,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2627,6 +2982,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a657b239c9dae14d986a8f33183a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .497000009}
+--- !u!114 &724112492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 724112489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: 0
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &751962096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,7 +3407,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: .816176474, g: .816176474, b: .816176474, a: .0196078438}
+  m_BackGroundColor: {r: .632352948, g: .347088665, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3040,6 +3453,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 847998374}
   - 212: {fileID: 847998375}
+  - 114: {fileID: 847998376}
   m_Layer: 0
   m_Name: Tile1Glow
   m_TagString: Untagged
@@ -3069,7 +3483,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3087,6 +3501,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5ed42d70c6a61224e8235ba8447e6398, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &847998376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 847998373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &919799770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,6 +3640,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 934380156}
   - 212: {fileID: 934380157}
+  - 114: {fileID: 934380158}
   m_Layer: 0
   m_Name: Tile2Glow
   m_TagString: Untagged
@@ -3197,7 +3670,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3215,6 +3688,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8c67e063b6cbc594f87b746ff30039b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &934380158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 934380155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &942324131
 GameObject:
   m_ObjectHideFlags: 0
@@ -4277,6 +4808,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1486323878}
   - 212: {fileID: 1486323877}
+  - 114: {fileID: 1486323879}
   m_Layer: 0
   m_Name: Tile2Glow
   m_TagString: Untagged
@@ -4294,7 +4826,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -4324,6 +4856,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 83125952}
   m_RootOrder: 0
+--- !u!114 &1486323879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486323876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &1509627172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,6 +5273,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1649728471}
   - 212: {fileID: 1649728472}
+  - 114: {fileID: 1649728473}
   m_Layer: 0
   m_Name: Tile3Glow
   m_TagString: Untagged
@@ -4712,7 +5303,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -4730,6 +5321,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b06f8024d9fc82547a419a1bf175f46f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1649728473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649728470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &1666996829
 GameObject:
   m_ObjectHideFlags: 0
@@ -5132,6 +5781,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1744258581}
   - 212: {fileID: 1744258582}
+  - 114: {fileID: 1744258583}
   m_Layer: 0
   m_Name: Tile5Glow
   m_TagString: Untagged
@@ -5161,7 +5811,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -5179,6 +5829,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9628f9c02fafa0140966b93ac24cad85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1744258583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1744258580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: .0625
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &1763645735
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,6 +6114,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1917213858}
   - 212: {fileID: 1917213859}
+  - 114: {fileID: 1917213860}
   m_Layer: 0
   m_Name: GlowBottom
   m_TagString: Untagged
@@ -5435,7 +6144,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14aab6900bf022142812d02095df40c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -5453,6 +6162,64 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a657b239c9dae14d986a8f33183a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .252999991}
+--- !u!114 &1917213860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917213857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150c36e8ad35029478c942c8d6ff0603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4278190335
+    key1:
+      serializedVersion: 2
+      rgba: 4278648688
+    key2:
+      serializedVersion: 2
+      rgba: 2688024320
+    key3:
+      serializedVersion: 2
+      rgba: 16712192
+    key4:
+      serializedVersion: 2
+      rgba: 14876927
+    key5:
+      serializedVersion: 2
+      rgba: 255
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  tintSpeed: .5
+  tintOffset: 0
+  minAlpha: .5
+  maxAlpha: 1
 --- !u!1 &1975129651
 GameObject:
   m_ObjectHideFlags: 0

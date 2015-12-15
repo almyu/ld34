@@ -25,12 +25,13 @@ namespace LD34 {
         }
 
         public void FinishPulse(float timing) {
-            Hero.instance.CeaseFire(hand);
             nextHitIsLethal = true;
+            Hero.instance.CeaseFire(hand);
         }
 
         public void FailPulse() {
             if (wasActivated) Hero.instance.CeaseFire(hand);
+            else Destroy(gameObject, afterlife * 2f);
             charge = true;
         }
 
